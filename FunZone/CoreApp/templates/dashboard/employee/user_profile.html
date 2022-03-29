@@ -1,0 +1,78 @@
+{% extends 'dashboard/employee/base.html' %}
+{% load static %}
+
+{% block body %}
+<div id="content-wrapper" class="home">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
+            <li class="breadcrumb-item text-success">Profile</li>
+            <li class="breadcrumb-item text-danger active">View Profile</li>
+        </ol>
+        <div class="card mb-3 fieldbox">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% if users %}
+            {% for user in users %}
+                <div class="card-body">
+                    <center>
+                        {% if user.avatar %}
+                            <img src="{{ user.avatar.url }}" class="img-thumbnail" alt="{{ user.user.username }}" style="height: 225px; width: 300px">
+                        {% else %}
+                            <span class="text-muted">No Profile Picture for {{ user.user.username }}</span>
+                        {% endif %}
+                    </center>
+                    <table class="table tablebox" id="tbox">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Information</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Username</td>
+                                <td>{{ user.user.username }}</td>
+                            </tr>
+                            <tr>
+                                <td>First Name</td>
+                                <td>{{ user.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td>{{ user.last_name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td>{{ user.birth_date }}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td>{{ user.phonenumber }}</td>
+                            </tr>
+                            <tr>
+                                <td>Country</td>
+                                <td>{{ user.country }}</td>
+                            </tr>
+                            <tr>
+                                <td>Hobby</td>
+                                <td>{{ user.hobby }}</td>
+                            </tr>                 
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+            {% else %}
+                <div class="card-header bg-white cardhead">
+                    <center><span><p class="text-danger">NO PROFILE CREATED YET</p></span></center>
+                    <center><a class="text-success" href="{% url 'org_create_profile' %}">Click here to create</center>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

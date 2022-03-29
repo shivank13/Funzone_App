@@ -1,0 +1,56 @@
+{% extends 'dashboard/organizer/base.html' %}
+{% load static %}
+
+
+{% block body %}
+<div id="content-wrapper" class="home">
+  <div class="container-fluid">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
+          <li class="breadcrumb-item text-success">Manage Quizzes</li>
+          <li class="breadcrumb-item text-danger active">List Quizzes</li>
+      </ol>
+      <div class="card m-3 p-3 fieldbox">
+          <div class="card-header bg-info cardhead" style="margin-bottom: 20px;">
+            <i class="fas fa-table text-primary"></i>
+            List of Quizzes
+          </div>
+
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+
+          <div class="row fieldbox p-3 m-3">
+            {% for quiz in quizzes %}
+                <div class="col-xl-3 qcardcontainer">
+                    <div class="card text-white bg-success">
+                        <div class="card-body qcardbody">
+                          <h5 class="card-title">{{ quiz.name }}</h5>
+                          <p class="card-text qcardtext">
+                            INTEREST: <span>{{ quiz.interest.get_html_badge }}</span>
+                            <br/>
+                            QUESTIONS: {{ quiz.questions_count }}
+                            <br/>
+                            TAKEN BY: {{ quiz.taken_count }}
+                          </p>
+                        </div>
+                        <div class="card-footer qcardfooter">
+                            <a href="{% url 'quiz_results' quiz.pk %}" 
+                              class="btn btn-primary">View Results</a>
+                        </div>
+                      </div>
+                </div>
+            {% empty %}
+                <div class="card col-xl-12">
+                    <div class="card-header bg-info cardhead">
+                      You haven't created any quiz yet
+                    </div>
+                </div>
+            {% endfor %}
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

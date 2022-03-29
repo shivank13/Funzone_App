@@ -1,0 +1,36 @@
+{% extends 'dashboard/organizer/base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div id="content-wrapper" class="home">
+  <div class="container-fluid"> 
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
+          <li class="breadcrumb-item text-success">Manage Quizzes</li>
+          <li class="breadcrumb-item text-danger">Add Quiz</li>
+          <li class="breadcrumb-item text-info">Delete Quiz</li>
+      </ol>
+      <div class="card mb-3 fieldbox">
+        <div class="card-header bg-success cardhead">
+              <i class="fas fa-table"></i>
+                Delete Quiz
+        </div>
+        <div class="card-body">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+          <h4 class="mb-3 text-warning">Confirm deletion</h4>
+          <p class="lead">Are you sure you want to delete the quiz <strong>"{{ quiz.name }}"</strong>?</p>
+          <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, I'm sure</button>
+            <a href="{% url 'update_quiz' quiz.pk %}" class="btn btn-success" role="button">Nevermind</a>
+          </form>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock body %}

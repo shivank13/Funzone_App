@@ -1,0 +1,41 @@
+{% extends 'dashboard/organizer/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block body %}
+<div id="content-wrapper" class="home">
+    <div class="container-fluid"> 
+  
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
+            <li class="breadcrumb-item text-success">Manage Quizzes</li>
+            <li class="breadcrumb-item text-danger">Add Quiz</li>
+            <li class="breadcrumb-item text-warning">Add Question</li>
+        </ol>
+        <div class="card fieldbox">
+            <div class="card-header bg-success cardhead">
+                <i class="fas fa-table"></i>
+                Add Question
+            </div>
+            <div class="card-body cardbody">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                <form method="post" novalidate class="addquestion">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="btnbox">
+                        <button type="submit" class="btn btn-success">SAVE</button>
+                        <a href="{% url 'update_quiz' quiz.pk %}" class="btn btn-danger" role="button">NEVERMIND</a>
+                    </div>
+                    
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock body %}

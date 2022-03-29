@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUN ZONE</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/four/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pages/signin.css' %}"/>
+  </head>
+   
+  <body>
+    
+    <div class="container">
+      <center><img src='{% static "img/pages/logo.svg" %}'/></center>
+
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+
+        <input type="text" name="username" placeholder="Email" required="Fill Username" style="background-color: white"><br>
+        <input type="password" name="password" placeholder="Password" required="Fill Password" style="background-color: white"><br>
+        <button class="btn btn-info" id="signin">LOGIN</button>
+
+        <center>New user? <a href="{% url 'emp_signup' %}">SignUp</a></center>
+      </form>
+    </div>  
+  </body>
+</html>

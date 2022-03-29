@@ -1,0 +1,38 @@
+{% extends 'dashboard/admin/base.html' %}
+
+{% block body %}
+<div id="content-wrapper" class="home">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
+            <li class="breadcrumb-item text-success">Manage Users</li>
+            <li class="breadcrumb-item text-danger">Users List</li>
+            <li class="breadcrumb-item text-warning active">Delete User</li>
+        </ol>
+        <div class="card mb-3 fieldbox">
+            <div class="card-header bg-info cardhead">
+                <i class="fas fa-table text-warning"></i>
+                Deleting {{ object.username }}
+            </div>
+            <div class="card-body">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <div class="row">
+                    <form method="post">
+                        {% csrf_token %}
+                        <b class="text-white m-3">Are you sure to delete detail of {{ object }} ?</b>
+                        <div class="btnstore">
+                            <button type="submit" class="btn btn-danger">YES, DELETE IT</button>
+                            <a class="btn btn-success" href="{% url 'all_users' %}">NO, NEVERMIND</a>
+                        </div>                  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

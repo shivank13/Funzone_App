@@ -1,0 +1,36 @@
+{% extends 'dashboard/organizer/base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+<div id="content-wrapper" class="home">
+    <div class="container-fluid"> 
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
+            <li class="breadcrumb-item text-success">Manage Books</li>
+            <li class="breadcrumb-item text-danger active">Update Books</li>
+        </ol>
+        <div class="card fieldbox m-3">
+            <div class="card-header bg-info cardhead">
+                <i class="fas fa-table text-primary"></i>
+                Update Books
+            </div>
+        </div>
+        <div class="card-body addbook p-3">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" id="myFile" name="file" placeholder="Report Attachment" 
+                    enctype="multipart/form-data">
+                <button type="submit" class="btn btn-danger" href="">Update Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

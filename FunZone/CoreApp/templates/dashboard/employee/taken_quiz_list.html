@@ -1,0 +1,52 @@
+{% extends 'dashboard/employee/base.html' %}
+
+
+{% block body %}
+<div id="content-wrapper" class="home">
+  <div class="container-fluid">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
+      <li class="breadcrumb-item text-success active">Challenges</li>
+    </ol>
+    <div class="card mb-3 fieldbox">
+      <div class="card-header bg-success cardhead">
+        <i class="fas fa-table text-primary"></i>
+        List of Taken Quiz
+      </div>
+      <div class="card-body">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% include 'dashboard/employee/header.html' with active='taken' %}
+        
+        <div class="row fieldbox p-3 m-3">
+          {% for taken_quiz in taken_quizzes %}
+              <div class="col-xl-3 qcardcontainer">
+                  <div class="card text-white bg-success">
+                      <div class="card-body qcardbody">
+                        <h5 class="card-title">{{ taken_quiz.quiz.name }}</h5>
+                      </div>
+                      <div class="card-footer qcardfooter">
+                        <p class="qcardtext">
+                          INTEREST: <span>{{ taken_quiz.quiz.interest.get_html_badge }}</span>
+                          <br/>
+                          SCORE: {{ taken_quiz.score }}
+                        </p>
+                      </div>
+                  </div>
+              </div>
+          {% empty %}
+              <div class="card col-xl-12">
+                  <div class="card-header text-danger">
+                    You haven't completed any quiz yet
+                  </div>
+              </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

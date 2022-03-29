@@ -1,0 +1,70 @@
+{% extends 'dashboard/employee/base.html' %}
+{% load static %}
+
+{% block body %}
+<div id="content-wrapper" class="home">
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Overview</li>
+        </ol>
+
+        <!-- Icon Cards-->
+        <div class="row m-3 p-3">
+            <div class="col-xl-6">
+                <div class="card text-white bg-success o-hidden">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <div class="mr-5"> {{ interest }}</div>
+                    </div>
+                    <div class="card-footer text-white">
+                        <span>Total Number of Interests</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card text-white bg-danger o-hidden">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-fw fa-user"></i>
+                        </div>
+                        <div class="mr-5">{{ employee }}</div>
+                    </div>
+                    <div class="card-footer text-white">
+                        <span>Total No Of Users</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row fieldbox p-3 m-3">
+            {% for quiz in quizzes %}
+                <div class="col-xl-3 qcardcontainer">
+                    <div class="card text-white bg-primary">
+                        <div class="card-body qcardbody">
+                          <h5 class="card-title">{{ quiz.name }}</h5>
+                          <p class="card-text qcardtext">
+                            INTEREST: <span>{{ quiz.interest.get_html_badge }}</span>
+                            <br/>
+                            QUESTIONS: {{ quiz.questions_count }}
+                          </p>
+                        </div>
+                        <div class="card-footer qcardfooter">
+                            <a href="{% url 'start_quiz' quiz.pk %}" 
+                                class="btn btn-danger">Start Quiz</a>
+                        </div>
+                      </div>
+                </div>
+            {% empty %}
+                <div class="card mb-3 fieldbox">
+                    <div class="card-header bg-info cardhead">
+                        No quiz matching your interests right now
+                    </div>
+                </div>
+            {% endfor %}
+        </div>                  
+    </div>
+</div>
+{% endblock body%}

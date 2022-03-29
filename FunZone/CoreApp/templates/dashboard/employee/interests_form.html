@@ -1,0 +1,60 @@
+{% extends 'dashboard/employee/base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div id="content-wrapper" class="home">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
+            <li class="breadcrumb-item text-success active">Update Interests</li>
+        </ol>
+    
+        <div class="card mb-3 fieldbox">
+            <div class="card-header bg-success cardhead">
+                <i class="fas fa-table text-white"></i>
+                Please Select Interests
+            </div>
+            <div class="card-body">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                <form method="post" novalidate class="form-interests">
+                    {% csrf_token %}
+                    <div class="divider">
+                        <div class="div1">
+                            INTERESTS
+                        </div>
+                        <div class="div2">
+                            {% render_field form.interests %}
+                        </div>
+                    </div>
+                    <div class="btnbox">
+                        <button type="submit" class="btn btn-success">SAVE CHANGES</button>
+                        <a href="{% url 'employee' %}" class="btn btn-danger">NEVERMIND</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
+{% block extrascripts %}
+<script type="text/javascript">
+      $(function () {
+          $(".bs-modal").each(function () {
+              $(this).modalForm({formURL: $(this).data("form-url")});
+          });
+          
+          $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+              $(".alert").slideUp(500);
+          });
+      });
+</script>
+{% endblock extrascripts %}

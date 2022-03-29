@@ -1,0 +1,26 @@
+{% load static %}
+{% block body %}
+<h4 class="cardbody text-primary text-center m-3 font-weight-bold">QUIZZES</h4>
+<p class="interests">
+    INTERESTS:  
+    {% for interest in user.employee.interests.all %} 
+        {{ interest.get_html_badge }}
+    {% endfor %}
+    <a href="{% url 'emp_interests' %}"><small>(Update Interests)</small></a>
+</p>
+
+<ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+        <b>
+            <a class="nav-link {% if active == 'new' %} active text-danger {% endif %} text-success" 
+            href="{% url 'emp_allquiz' %}">NEW QUIZZES</a>
+        </b>
+    </li>
+    <li class="nav-item">
+        <b>
+            <a class="nav-link{% if active == 'taken' %} active text-danger {% endif %} text-success"
+            href="{% url 'emp_takenquiz' %}">TAKEN QUIZZES</a>
+        </b>
+    </li>
+</ul>
+{% endblock body%}

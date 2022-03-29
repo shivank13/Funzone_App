@@ -1,0 +1,54 @@
+{% extends 'dashboard/employee/base.html' %}
+
+{% block body %}
+<div id="content-wrapper" class="home">
+  <div class="container-fluid">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
+      <li class="breadcrumb-item text-success active">Challenges</li>
+    </ol>
+    <div class="card mb-3 fieldbox">
+      <div class="card-header bg-success cardhead">
+        <i class="fas fa-table text-white"></i>
+        List of Quiz Posted
+      </div>
+      <div class="card-body">
+
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+
+        {% include 'dashboard/employee/header.html' with active='new' %}    
+        <div class="row fieldbox p-3 m-3">
+          {% for quiz in quizzes %}
+              <div class="col-xl-3 qcardcontainer">
+                  <div class="card text-white bg-primary">
+                      <div class="card-body qcardbody">
+                        <h5 class="card-title">{{ quiz.name }}</h5>
+                        <p class="card-text qcardtext">
+                          INTEREST: <span>{{ quiz.interest.get_html_badge }}</span>
+                          <br/>
+                          QUESTIONS: {{ quiz.questions_count }}
+                        </p>
+                      </div>
+                      <div class="card-footer qcardfooter">
+                          <a href="{% url 'start_quiz' quiz.pk %}" 
+                            class="btn btn-danger">Start Quiz</a>
+                      </div>
+                    </div>
+              </div>
+          {% empty %}
+              <div class="card col-xl-12">
+                  <div class="card-header bg-info cardhead">
+                      No quiz matching your interests right now
+                  </div>
+              </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

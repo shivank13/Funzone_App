@@ -1,0 +1,42 @@
+{% extends 'dashboard/employee/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div id="content-wrapper" class="home">
+  <div class="container-fluid">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
+      <li class="breadcrumb-item text-success active">Challenges</li>
+    </ol>
+    
+    <div class="card mb-3 fieldbox">
+      <div class="card-header bg-success cardhead">
+        <i class="fas fa-table text-primary"></i>
+        List of Taken Quiz
+      </div>
+      
+      <div class="card-body">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %} 
+
+        <h4 class="mb-3 cardbody text-warning">{{ quiz.name }}</h4>
+        <div class="questionbox">
+          <p class="lead font-weight-bold text-info">{{ question.text }}</p>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="options">
+              {% render_field form.answer %}
+            </div>
+            <button type="submit" class="btn btn-success">NEXT <i class="fas fa-arrow-right"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

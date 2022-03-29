@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUN ZONE</title>
+
+    {% load static %}
+
+    {% load crispy_forms_tags %}
+    {% load widget_tweaks %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/four/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pages/signup.css' %}"/>
+  </head>
+  <body>
+    <div class="container">
+      <center><img src='{% static "img/pages/logo.svg" %}'/></center>
+
+      <form method="post" novalidate>
+        <center><h2 class="text-primary">EMPLOYEE SIGN-UP</h2></center>
+        {% csrf_token %}
+        <div class="myform">
+            
+          <div class="form-group">
+            {% render_field form.username type="text" class="form-control" placeholder="Username" %}
+          </div>
+            
+          <div class="form-group">
+            {% render_field form.password1 type="password" class="form-control" placeholder="Password" %}
+          </div>
+            
+          <div class="form-group">
+            {% render_field form.password2 type="password" class="form-control" placeholder="Confirm Password" %}
+          </div>
+          <div class="block">
+            <div class="div1">
+              <label>Interests</label>
+            </div>
+            <div class="div2">
+              {% render_field form.interests %}
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-info" id="signup">SIGN UP</button>
+      </form>
+      <center>Already Registered? <a href="{% url 'login_form' %}">LogIn</a></center>
+    </div>
+  </body>
+</html>

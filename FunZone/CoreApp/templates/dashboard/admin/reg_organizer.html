@@ -1,0 +1,42 @@
+{% extends 'dashboard/admin/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block body %} 
+<div id="content-wrapper" class="home">
+    <div class="container-fluid" id="parentcont">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
+            <li class="breadcrumb-item text-success active">Register Organizer</li>
+        </ol>
+        <div class="card mb-3 fieldbox">
+          <div class="card-header bg-success text-white cardhead">
+            <i class="fas fa-table"></i>
+              Please Add New Organizer For FunZone
+          </div>
+          <div class="card-body cardbody regform">
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+            <form method="post" novalidate class="reginput">
+              {% csrf_token %}
+              <div class="form-group">
+                {% render_field form.username type="text" class="form-control" placeholder="Username" %}
+              </div>
+              <div class="form-group">
+                {% render_field form.password1 type="password" class="form-control" placeholder="Password" %}
+              </div>
+              <div class="form-group">
+                {% render_field form.password2 type="password" class="form-control" placeholder="Confirm Password" %}
+              </div>
+              <button type="submit" class="btn btn-success">SUBMIT</button>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
