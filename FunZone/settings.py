@@ -33,9 +33,6 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'crispy_forms',
     'CoreApp',
-    'channels',
-    'GameApp',
-
 ]
 
 MIDDLEWARE = [
@@ -67,7 +64,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'FunZone.wsgi.application'
-ASGI_APPLICATION = 'FunZone.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -135,12 +131,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # LOGIN_URL = 'login_form'
-
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [("localhost", 6379)],
-        },
-    },
-}
