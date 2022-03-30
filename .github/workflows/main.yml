@@ -1,0 +1,45 @@
+name: cloudrun-deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+    name: Cloud Run Deploy
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@master
+
+
+      # Setup gcloud CLI
+      - uses: google-github-actions/setup-gcloud@v0
+        with:
+          service_account_email: ${{ secrets.SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY}}
+          
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - name: Configure project id
+        run: |
+          gcloud config set project us-gcp-ame-con-116-npd-1
+      #Build and Push image
+      - name: Build
+        run: |-
+              docker build -t gcr.io/us-gcp-ame-con-116-npd-1/hashedinfunzone .
+              
+          # Configure docker to use the gcloud command-line tool as a credential helper
+      - run: |
+            gcloud auth configure-docker -q
+      # Push image to Google Container Registry
+      - name: Push
+        run: |-
+            docker push gcr.io/us-gcp-ame-con-116-npd-1/hashedinfunzone
+   
+      - name: Deploy
+        run: |    
+            gcloud run deploy hashedinfunzone --image gcr.io/us-gcp-ame-con-116-npd-1/hashedinfunzone --max-instances 3 --memory 4096Mi --platform managed --region us-west2 --allow-unauthenticated  --vpc-connector='hu-conn' 
