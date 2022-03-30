@@ -8,8 +8,8 @@ FROM python:3.7
 COPY . code
 WORKDIR /code
 
-EXPOSE 8080
+EXPOSE 8000
 
 # runs the production server
 ENTRYPOINT ["python3", "manage.py"]
-CMD ["runserver", "0.0.0.0:8080"]
+CMD ["runserver", "0.0.0.0:8000"]
