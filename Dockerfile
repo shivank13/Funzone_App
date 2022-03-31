@@ -19,10 +19,10 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
-RUN pip3 install --upgrade pip wheel
+RUN pip install --upgrade pip wheel
 COPY requirements.txt /code/
-RUN pip3 install -r requirements.txt
-#RUN python3 -m spacy download en_core_web_sm
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . /code/
 EXPOSE 8080
 ENTRYPOINT ["python3", "manage.py"]
