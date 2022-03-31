@@ -19,11 +19,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
-RUN pip install --upgrade pip wheel
+RUN pip3 install --upgrade pip wheel
 COPY requirements.txt /code/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install -r requirements.txt
 
-COPY . /code/
-EXPOSE 8080
+COPY . code
+EXPOSE 8000
 ENTRYPOINT ["python3", "manage.py"]
 CMD ["runserver", "0.0.0.0:8000"]
