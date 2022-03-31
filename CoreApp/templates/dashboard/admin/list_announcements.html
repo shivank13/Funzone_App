@@ -2,69 +2,39 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-  <div class="container-fluid">
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
-          <li class="breadcrumb-item text-success">Announcements</li>
-          <li class="breadcrumb-item text-danger active">Announcements List</li>
-      </ol>
-      <div class="card mb-3 fieldbox">
-          <div class="card-header bg-success cardhead">
-              <i class="fas fa-table text-primary"></i>
-              Delete Announcements
-              <a  class="btn btn-primary" href="{% url 'adm_add_notice' %}" style="padding: 8px 12px; float: right; color: white;">Add Anncouncement</a>
+  <div class="homecontainer">
+    <div class="card-header pagehead">
+      <i class="fas fa-table text-white"></i>
+      Delete Announcements
+      <a  class="btn btn-primary" href="{% url 'adm_add_notice' %}" style="padding: 4px 12px; float: right; color: white;">Add Anncouncement</a>
+    </div>
+    <div class="card-body pagecontainer">
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+              {{ message }}
           </div>
-          <div class="card-body m-3 cardbody">
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-            <table class="table tablebox" id="dataTable">
-              <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Anncouncement</th>
-                    <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% if tises %}
-                {% for tise in tises %}
-                <tr>
-                  <td>{{ tise.id }}</td>
-                  <td>{{ tise.content }}</td>
-                  <td>
-                    <a href="{% url 'adm_delete_notice' tise.pk %}"><button type="button" class="btn btn-danger">Delete</button></a>
-                  </td>
-                </tr>
-                {% endfor %}
-                {% endif %}
-              </tbody>
-          </table>
-          {% if is_paginated %}
-          <ul class="pagination">
-            {% if page_obj.has_previous %}
-              <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-            {% else %}
-              <li class="disabled"><span>&laquo;</span></li>
-            {% endif %}
-            {% for i in paginator.page_range %}
-              {% if page_obj.number == i %}
-                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-              {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
-              {% endif %}
-            {% endfor %}
-            {% if page_obj.has_next %}
-              <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-            {% else %}
-              <li class="disabled"><span>&raquo;</span></li>
-            {% endif %}
-          </ul>
-        {% endif %}
-          </div>
-      </div>
+      {% endfor %}
+      <table class="table mb-0 tablebox">
+        <thead>
+          <tr>
+              <th>Anncouncement</th>
+              <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if tises %}
+          {% for tise in tises %}
+          <tr>
+            <td>{{ tise.content }}</td>
+            <td>
+              <a href="{% url 'adm_delete_notice' tise.pk %}"><button type="button" class="btn secondarybtn">Delete</button></a>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 {% endblock %}

@@ -1,7 +1,6 @@
 {% load static %}
 {% block body %}
-<h4 class="cardbody text-primary text-center m-3 font-weight-bold">QUIZZES</h4>
-<p class="interests">
+<p class="pagesubhead">
     INTERESTS:  
     {% for interest in user.employee.interests.all %} 
         {{ interest.get_html_badge }}

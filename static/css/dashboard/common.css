@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;1,200&display=swap");
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+.card {
+  overflow: hidden;
+}
+.home {
+  background-color: #141a44;
+  margin-top: 100px;
+  padding: 20px 2%;
+}
+/* hiding arrow */
+.arrow,
+.arrow:hover {
+  color: transparent;
+}
+.dropmenu {
+  background-color: white;
+}
+.dropitem {
+  font-size: medium;
+  font-weight: bold;
+  color: #454d82;
+}
+
+#wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+#wrapper #content-wrapper {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.navbar {
+  background-color: #141a44;
+  width: 84%;
+  margin-left: 16%;
+  height: 100px;
+  padding: 20px 3% 0px;
+  color: white;
+}
+.welcome {
+  line-height: 15px;
+}
+.navbar-nav .nav-item.active .nav-link {
+  color: #fff;
+}
+.navbar-nav .nav-item.dropdown.no-arrow .dropdown-toggle::after {
+  display: none;
+}
+
+.sidebar {
+  width: 16%;
+  min-height: 100vh;
+  background-color: #454d82;
+}
+.sidebar .nav-item .dropdown-menu {
+  position: absolute !important;
+  -webkit-transform: none !important;
+  transform: none !important;
+  left: 90px !important;
+  margin: 0;
+}
+.sidebar .nav-item .nav-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1rem 10%;
+  width: 300px;
+}
+.sidebar .nav-item .nav-logo {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+.sidebar .navdivider {
+  display: block;
+  background-color: white;
+  width: 80%;
+  border-style: solid;
+  border-color: white;
+  margin: 5px 10%;
+}
+.sidebar .nav-item .nav-link span {
+  font-size: 1rem;
+  display: inline;
+}
+.sidebar .nav-item .dropdown-menu {
+  position: static !important;
+  margin: 0 1rem;
+  top: 0;
+}
+.sidebar .nav-item.dropdown .dropdown-toggle::after {
+  display: block;
+}
+.sidebar.toggled {
+  overflow: visible;
+  width: 90px !important;
+}
+.sidebar.toggled .nav-item:last-child {
+  margin-bottom: 1rem;
+}
+.sidebar.toggled .nav-item .nav-link {
+  text-align: center;
+  padding: 0.75rem 1rem;
+  width: 90px;
+}
+.sidebar.toggled .nav-item .nav-link span {
+  font-size: 0.65rem;
+  display: block;
+}
+.sidebar.toggled .nav-item .dropdown-menu {
+  position: absolute !important;
+  -webkit-transform: none !important;
+  transform: none !important;
+  left: calc(90px + 0.5rem) !important;
+  margin: 0;
+}
+.sidebar.toggled .nav-item .dropdown-menu.dropup {
+  bottom: 0;
+  top: auto !important;
+}
+.sidebar.toggled .nav-item.dropdown .dropdown-toggle::after {
+  display: none;
+}

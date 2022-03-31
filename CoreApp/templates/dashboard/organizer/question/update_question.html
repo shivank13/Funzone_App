@@ -3,21 +3,12 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-  <div class="container-fluid"> 
-
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
-          <li class="breadcrumb-item text-success">Manage Quizzes</li>
-          <li class="breadcrumb-item text-danger">Add Quiz</li>
-          <li class="breadcrumb-item text-warning">Add Question</li>
-          <li class="breadcrumb-item text-info">Update Question</li>
-      </ol>
+  <div class="homecontainer"> 
       <form method="post" novalidate class="addquestion">
         {% csrf_token %}
         {{ formset.management_form }}
         {{ form|crispy }}
-        <div class="card mb-3 {% if formset.errors %} border-danger {% endif %}">
+        <div class="card {% if formset.errors %} border-danger {% endif %}">
           <div class="card-header">
             <div class="row text-center">
               <div class="col-8 text-success">
@@ -31,7 +22,7 @@
           {% for error in formset.non_form_errors %}
             <div class="card-body bg-danger border-danger text-white py-2">{{ error }}</div>
           {% endfor %}
-          <div class="list-group list-group-flush list-group-formset">
+            <div class="list-group list-group-flush list-group-formset">
             {% for form in formset %}
               <div class="list-group-item">
                 <div class="row">
@@ -46,11 +37,11 @@
                 </div>
               </div>
             {% endfor %}
-          </div>
+            </div>
         </div>
         <div class="btnbox">
-          <button type="submit" class="btn btn-success">SAVE CHANGES</button>
-          <a href="{% url 'delete_question' quiz.pk question.pk %}" class="btn btn-danger float-right">DELETE</a>
+          <button type="submit" class="btn primarybtn">Save Options</button>
+          <a href="{% url 'delete_question' quiz.pk question.pk %}" class="btn secondarybtn">Delete</a>
         </div>
         
       </form>

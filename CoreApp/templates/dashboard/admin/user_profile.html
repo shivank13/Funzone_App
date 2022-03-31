@@ -3,28 +3,24 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Profile</li>
-            <li class="breadcrumb-item text-danger active">View Profile</li>
-        </ol>
-        <div class="card mb-3 fieldbox">
+    <div class="homecontainer">
+        <div class="pagecontainer">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
             {% if users %}
             {% for user in users %}
                 <div class="card-body">
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-
-                    {% if user.avatar %}
-                        <center><img src="{{ user.avatar.url }}" class="img-thumbnail" alt="{{ user.user.username }}" style="height: 225px; width: 300px"></center><br>
-                    {% else %}
-                        <span class="text-muted">No Profile Picture for {{ user.user.username }}</span>
-                    {% endif %}
-
+                    <center>
+                        {% if user.avatar %}
+                            <img src="{{ user.avatar.url }}" class="img-thumbnail" alt="{{ user.user.username }}" style="height: 225px; width: 300px">
+                        {% else %}
+                            <span class="text-muted">No Profile Picture for {{ user.user.username }}</span>
+                        {% endif %}
+                    </center>
                     <table class="table tablebox" id="tbox">
                         <thead>
                             <tr>
@@ -64,22 +60,14 @@
                         </tbody>
                     </table>
                 </div>
-                {% endfor %}
-                {% else %}
-                    <div class="card-header bg-white cardhead">
-                        <center><span><p class="text-warning">NO PROFILE CREATED YET</p></span></center>
-                        <center><a class="text-success" href="{% url 'lcreate_profile' %}">Click here to create</center>
-                    </div>
-                {% endif %}
+            {% endfor %}
+            {% else %}
+                <div class="card-body bg-white">
+                    <center class="redirect">NO PROFILE CREATED YET</center>
+                    <center><a class="generallink" href="{% url 'adm_create_profile' %}">Click here to create</center>
                 </div>
-                </div>
-            </div>  
+            {% endif %}
         </div>
     </div>
-
-    <script type="text/javascript" src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-
+</div>
 {% endblock body %}

@@ -6,30 +6,23 @@
 {% block body %}
 
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Announcements</li>
-            <li class="breadcrumb-item text-danger active">Post Announcements</li>
-        </ol>
-        <div class="card mb-3 fieldbox">
-            <div class="card-header bg-success cardhead">
-                <i class="fas fa-table"></i>
-                Post New Announcement
-            </div>
-            <div class="card card-body fieldbox">
-                <div class="noticeform">
-                    <form method="POST">
-                        {% csrf_token %}
-                        <p class="text-primary cardbody">CONTENT:</p>
-                        {% render_field form.content type="textbox" class="form-control" %}
+    <div class="homecontainer">
+        <div class="card-header pagehead">
+            <i class="fas fa-table"></i>
+            Post New Announcement
+        </div>
+        <div class="card-body pagecontainer">
+            <div class="noticeform">
+                <form method="POST">
+                    {% csrf_token %}
+                    <p class="form-head">CONTENT:</p>
+                    {% render_field form.content type="textbox" class="form-control" %}
 
-                        <div class="btnbox">
-                            <button type="submit" class="btn btn-success">POST</button>
-                            <a href="{% url 'organizer' %}" class="btn btn-danger">CANCEL</a>
-                        </div>
-                    </form>
-                </div>
+                    <div class="btnbox">
+                        <button type="submit" class="btn primarybtn">Post</button>
+                        <a href="{% url 'organizer' %}" class="btn secondarybtn">Cancel</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

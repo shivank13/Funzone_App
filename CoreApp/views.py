@@ -186,7 +186,7 @@ def start_quiz(request, pk):
 
 class EmployeeBooksListView(ListView):
     model = Books
-    template_name = 'dashboard/employee/list_notes.html'
+    template_name = 'dashboard/employee/list_books.html'
     context_object_name = 'books'
     paginate_by = 20
 

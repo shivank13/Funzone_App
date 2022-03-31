@@ -5,28 +5,22 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-  <div class="container-fluid">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
-      <li class="breadcrumb-item text-success active">Challenges</li>
-    </ol>
-    
-    <div class="card mb-3 fieldbox">
-      <div class="card-header bg-success cardhead">
-        <i class="fas fa-table text-primary"></i>
+  <div class="homecontainer">
+      <div class="card-header pagehead">
+        <i class="fas fa-table"></i>
         List of Taken Quiz
       </div>
       
-      <div class="card-body">
+      <div class="card-body pagecontainer">
         {% for message in messages %}
           <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
             {{ message }}
           </div>
         {% endfor %} 
-
+        
         <h4 class="mb-3 cardbody text-warning">{{ quiz.name }}</h4>
-        <div class="questionbox">
-          <p class="lead font-weight-bold text-info">{{ question.text }}</p>
+        <div class="questionbox" style="color: white;">
+          <p class="lead font-weight-bold text-white">{{ question.text }}</p>
           <form method="post" novalidate>
             {% csrf_token %}
             <div class="options">

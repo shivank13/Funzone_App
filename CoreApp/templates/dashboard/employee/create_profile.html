@@ -3,24 +3,19 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Profile</li>
-            <li class="breadcrumb-item text-danger active">Create Profile</li>
-        </ol>
-        <div class="card mb-3 fieldbox">
+    <div class="homecontainer">
+        <div class="pagecontainer">
             {% if users %}
-                <div class="card-header bg-success cardhead">
+                <div class="card-body bg-white">
                     <center>
-                        <a href="{% url 'emp_profile' %}" class="text-white">
+                        <a href="{% url 'emp_profile' %}" class="generallink">
                             YOUR PROFILE IS ALREADY CREATED
                         </a>
                     </center>
                 </div>
             {% else %}
-                <div class="card-header bg-info cardhead">
-                    <i class="fas fa-table text-primary"></i>
+                <div class="card-header pagehead">
+                    <i class="fas fa-table"></i>
                     Create Your Profile
                 </div>
                 <div class="card-body formbody">

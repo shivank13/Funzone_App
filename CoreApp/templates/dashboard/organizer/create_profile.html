@@ -3,19 +3,18 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Profile</li>
-            <li class="breadcrumb-item text-danger active">Create Profile</li>
-        </ol>
-        <div class="card mb-3 fieldbox">
+    <div class="homecontainer">
+        <div class="pagecontainer">
             {% if users %}
-                <div class="card-header bg-success cardhead">
-                    <center class="text-white">YOUR PROFILE IS ALREADY CREATED</center>
+                <div class="card-body bg-white">
+                    <center>
+                        <a href="{% url 'org_profile' %}" class="generallink">
+                            YOUR PROFILE IS ALREADY CREATED
+                        </a>
+                    </center>
                 </div>
             {% else %}
-                <div class="card-header bg-success cardhead">
+                <div class="card-header pagehead">
                     <i class="fas fa-table"></i>
                     Create Your Profile
                 </div>
@@ -59,7 +58,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" id="save" class="btn btn-success" href="">Save</button>
+                            <button type="submit" id="save" class="btn btn-success" href="">SAVE</button>
                         </div>
                     </form>
                 </div>

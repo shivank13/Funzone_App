@@ -3,13 +3,8 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Profile</li>
-            <li class="breadcrumb-item text-danger active">View Profile</li>
-        </ol>
-        <div class="card mb-3 fieldbox">
+    <div class="homecontainer">
+        <div class="pagecontainer">
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
                     {{ message }}
@@ -67,9 +62,9 @@
                 </div>
             {% endfor %}
             {% else %}
-                <div class="card-header bg-white cardhead">
-                    <center><span><p class="text-danger">NO PROFILE CREATED YET</p></span></center>
-                    <center><a class="text-success" href="{% url 'org_create_profile' %}">Click here to create</center>
+                <div class="card-body bg-white">
+                    <center class="redirect">NO PROFILE CREATED YET</center>
+                    <center><a class="generallink" href="{% url 'emp_create_profile' %}">Click here to create</center>
                 </div>
             {% endif %}
         </div>

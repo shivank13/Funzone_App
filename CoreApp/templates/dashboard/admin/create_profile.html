@@ -1,26 +1,21 @@
 {% extends 'dashboard/admin/base.html' %}
 {% load static %}
- 
-{% block body %}
+
+{% block body %} 
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Profile</li>
-            <li class="breadcrumb-item text-danger active">Create Profile</li>
-        </ol>
-        <div class="card mb-3 fieldbox">
+    <div class="homecontainer">
+        <div class="pagecontainer">
             {% if users %}
-                <div class="card-header bg-success cardhead">
+                <div class="card-body bg-white">
                     <center>
-                        <a href="{% url 'emp_profile' %}" class="text-white">
+                        <a href="{% url 'adm_profile' %}" class="generallink">
                             YOUR PROFILE IS ALREADY CREATED
                         </a>
                     </center>
                 </div>
             {% else %}
-                <div class="card-header bg-info cardhead">
-                    <i class="fas fa-table text-primary"></i>
+                <div class="card-header pagehead">
+                    <i class="fas fa-table"></i>
                     Create Your Profile
                 </div>
                 <div class="card-body formbody">
@@ -63,7 +58,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" id="save" class="btn btn-success" href="">Save</button>
+                            <button type="submit" id="save" class="btn btn-success" href="">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -71,8 +66,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 {% endblock %}

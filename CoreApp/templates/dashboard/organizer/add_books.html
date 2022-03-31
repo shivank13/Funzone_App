@@ -3,52 +3,46 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Manage Books</li>
-            <li class="breadcrumb-item text-danger active">Add Book</li>
-        </ol>
-        <div class="card m-3 p-3 fieldbox">
-            <div class="card-header bg-success cardhead">
-              <i class="fas fa-table"></i>
-              Add Book
-            </div>
-            <div class="card-body">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
- 
-                <form action="{% url 'publish_book' %}" method="POST" enctype="multipart/form-data" 
-                    class="addbook">
-                    {% csrf_token %}
-                    <label class="labels" for="title">Book Title</label>
-                    <input type="text" class="form-control" name="title" required="required">
-                    <br style="clear:both;"/>
-                    <label class="labels" for="title">Interests</label>
-                    <select class="w3-select w3-border" name="interest_id" required="">
-                        <option value="">Choose Interest</option>
-                        {% if interests %}
-                        {% for interest in interests %}
-                            <option value="{{ interest.id }}">{{ interest.name }}</option>
-                        {% endfor %}
-                        {% endif %}
-                    </select>
-                    <br style="clear:both;"/>
-                    <label class="labels" for="cover">Cover Photo</label>
-                    <input type="file" id="cover" name="cover" placeholder="Report Attachment"
-                                enctype="multipart/form-data">
-                    <br style="clear:both;"/>
-                    <label class="labels" for="file">Book</label>
-                    <input type="file" id="file" name="file" placeholder="Report Attachment"
-                                enctype="multipart/form-data">
-                    <br style="clear:both;"/>
-                    <button type="submit" class="btn btn-success" href="">Submit</button>
-                </form>
-            </div>
-        </div>
+    <div class="homecontainer">
+        <div class="card-header pagehead">
+            <i class="fas fa-table"></i>
+            Add Book
+          </div>
+          <div class="card-body pagecontainer">
+              {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+
+              <form action="{% url 'publish_book' %}" method="POST" enctype="multipart/form-data" 
+                  class="addbook">
+                  <p class="form-head">ADD BOOK DETAILS:</p>
+                  {% csrf_token %}
+                  <label class="labels" for="title">Book Title</label>
+                  <input type="text" class="form-control" name="title" required="required">
+                  <br style="clear:both;"/>
+                  <label class="labels" for="title">Interests</label>
+                  <select class="w3-select w3-border" name="interest_id" required="">
+                      <option value="">Choose Interest</option>
+                      {% if interests %}
+                      {% for interest in interests %}
+                          <option value="{{ interest.id }}">{{ interest.name }}</option>
+                      {% endfor %}
+                      {% endif %}
+                  </select>
+                  <br style="clear:both;"/>
+                  <label class="labels" for="cover">Cover Photo</label>
+                  <input type="file" id="cover" name="cover" placeholder="Report Attachment"
+                              enctype="multipart/form-data">
+                  <br style="clear:both;"/>
+                  <label class="labels" for="file">Book</label>
+                  <input type="file" id="file" name="file" placeholder="Report Attachment"
+                              enctype="multipart/form-data">
+                  <br style="clear:both;"/>
+                  <button type="submit" class="btn primarybtn" href="">Submit</button>
+              </form>
+          </div>
     </div>
 </div>
 {% endblock %}

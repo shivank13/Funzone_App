@@ -9,21 +9,22 @@
     {% load static %}
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/four/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pages/dashboard/learner.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/common.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/learner.css' %}">
 </head>
 
 <body>
     <nav class="navbar navbar-expand fixed-top">
-        <img src='{% static "img/pages/logo.svg" %}'/>
-
+        <div class="welcome">
+            <h3>Hi, {{ user.username }}</h3>
+            <p>Many new games waiting to be played</p>
+        </div>
         <div class="dropdown ml-auto">
-            <a class="nav-link dropdown-toggle text-white" href="#" id="dropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-circle fa-md text-white"></i>
-                <span>{{ user.username }}</span>
+            <a class="nav-link dropdown-toggle arrow" href="#" id="dropdown" role="button" data-toggle="dropdown">
+                <img src='{% static "img/pages/user-men.svg" %}' width="50px" height="50px" alt="profile">
             </a>
             <div class="dropdown-menu dropdown-menu-right dropmenu">
-              <a class="dropdown-item dropitem" href="#">{{ user.username }}</a>
+              <a class="dropdown-item dropitem" href="{% url 'emp_profile' %}">{{ user.username }}</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item dropitem" href="" data-toggle="modal" data-target="#logoutModal">
                 LOGOUT                   
@@ -35,6 +36,12 @@
 
     <div id="wrapper">
         <ul class="sidebar navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-logo" href="{% url 'employee' %}">
+                    <img src='{% static "img/pages/logo.svg" %}'/>
+                </a>
+            </li> 
+            <hr width="80%" class="navdivider""/>
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'organizer' %}">
                     <i class="fa fa-home" aria-hidden="true"></i>

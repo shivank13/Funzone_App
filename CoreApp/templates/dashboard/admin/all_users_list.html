@@ -2,25 +2,21 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-  <div class="container-fluid">
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
-          <li class="breadcrumb-item text-success">Manange Users</li>
-          <li class="breadcrumb-item text-danger">Users List</li>
-      </ol>
-      <div class="card mb-3 fieldbox">
-        <div class="card-header bg-success cardhead">
+  <div class="homecontainer">
+        <div class="card-header pagehead">
           <i class="fas fa-table"></i>
           List Of Users
-          <a  class="btn btn-sm btn-primary" href="{% url 'create_user_form' %}" style="padding: 8px 12px; float: right;">Register Admin</a>
+          <a  class="btn btn-sm btn-primary" href="{% url 'create_user_form' %}" style="padding: 4px 12px; float: right;">
+            <b>Register Admin</b>
+          </a>
         </div>
-        <div class="card-body cardbody">
+        <div class="card-body pagecontainer">
           {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
               {{ message }}
             </div>
           {% endfor %}
-          <table class="table table-bordered tablebox" id="dataTable" width="100%" cellspacing="0">
+          <table class="table tablebox" id="dataTable">
               <thead>
                 <tr>
                     <th>No</th>
@@ -47,7 +43,9 @@
                             </td>
                             <td>{{ user.email }}</td>
                             <td>
-                              <a href="{% url 'delete_user' user.pk %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                              <a href="{% url 'delete_user' user.pk %}">
+                                <button type="button" class="btn primarybtn">Delete</button>
+                              </a>
                             </td>
                         </tr>
                     {% endfor %}

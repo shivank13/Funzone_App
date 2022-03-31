@@ -1,53 +1,52 @@
 {% extends 'dashboard/employee/base.html' %}
-
+{% load static %}
 {% block body %}
 <div id="content-wrapper" class="home">
-  <div class="container-fluid">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
-      <li class="breadcrumb-item text-success active">Challenges</li>
-    </ol>
-    <div class="card mb-3 fieldbox">
-      <div class="card-header bg-success cardhead">
-        <i class="fas fa-table text-white"></i>
-        List of Quiz Posted
+  <div class="homecontainer">
+    <div class="card-header pagehead">
+      <i class="fas fa-table"></i>
+      List of Quiz Posted
+    </div>
+    <div class="card-body pagecontainer">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        {{ message }}
       </div>
-      <div class="card-body">
+      {% endfor %}
 
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-          {{ message }}
-        </div>
-        {% endfor %}
-
-        {% include 'dashboard/employee/header.html' with active='new' %}    
-        <div class="row fieldbox p-3 m-3">
-          {% for quiz in quizzes %}
-              <div class="col-xl-3 qcardcontainer">
-                  <div class="card text-white bg-primary">
-                      <div class="card-body qcardbody">
-                        <h5 class="card-title">{{ quiz.name }}</h5>
-                        <p class="card-text qcardtext">
-                          INTEREST: <span>{{ quiz.interest.get_html_badge }}</span>
-                          <br/>
-                          QUESTIONS: {{ quiz.questions_count }}
-                        </p>
-                      </div>
-                      <div class="card-footer qcardfooter">
-                          <a href="{% url 'start_quiz' quiz.pk %}" 
-                            class="btn btn-danger">Start Quiz</a>
-                      </div>
+      {% include 'dashboard/employee/header.html' with active='new' %}    
+      <div class="row m-3 p-3">
+        <div class="row col-xl-12">
+            {% for quiz in quizzes %}
+                <div class="col-xl-3">
+                    <div class="
+                        quizcard
+                        {% if forloop.counter|divisibleby:2 %} quizcard2 {% endif %}
+                        {% if forloop.counter|divisibleby:3 %} quizcard3 {% endif %}
+                        {% if forloop.counter|divisibleby:4 %} quizcard4 {% endif %}
+                        "
+                    >
+                        <div class="row qcbody">
+                            <p class="float-left col-xl-9" >Quiz: {{ quiz.name }}</p>
+                            <a href="{% url 'start_quiz' quiz.pk %}" class="col-xl-3">
+                                <img  src='{% static "img/pages/Vector.svg" %}' width="40px">
+                            </a>
+                        </div>
+                        <div class="qctext">
+                            <div class="txt1">{{ quiz.questions_count }} Questions</div>
+                            <div class="txt2">{{ quiz.interest }}</div>
+                        </div>
                     </div>
-              </div>
-          {% empty %}
-              <div class="card col-xl-12">
-                  <div class="card-header bg-info cardhead">
-                      No quiz matching your interests right now
-                  </div>
-              </div>
-          {% endfor %}
+                </div>
+            {% empty %}
+                <div class="card mb-3 fieldbox">
+                    <div class="card-header bg-warning cardhead">
+                        No quiz matching your interests right now
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-      </div>
+      </div>  
     </div>
   </div>
 </div>

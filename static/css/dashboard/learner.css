@@ -1,0 +1,473 @@
+/* 
+  common
+*/
+.primarybtn {
+  background: #f44773;
+  border-radius: 50px;
+  font-family: "Be Vietnam";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #ffffff;
+}
+.primarybtn:hover {
+  color: whitesmoke;
+}
+.secondarybtn {
+  border: 1px solid #f44773;
+  box-sizing: border-box;
+  border-radius: 50px;
+  font-family: "Be Vietnam";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+  text-align: center;
+  color: #f44773;
+}
+.secondarybtn:hover {
+  color: white;
+  text-decoration: none;
+}
+.generallink {
+  font-family: "Be Vietnam";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+  text-align: center;
+  color: #f44773;
+}
+/* overview card in dashboard */
+.overview {
+  color: white;
+  display: flex;
+  background-color: #454d82;
+  border-radius: 20px;
+  padding: 10px 14px;
+  font-size: larger;
+}
+.overview > .txt1 {
+  flex: 1;
+  text-align: center;
+  border-right: 2px solid white;
+}
+.overview > .txt2 {
+  text-align: left;
+  margin-left: 25px;
+  flex: 2;
+}
+
+/* quiz cards */
+.quizcard {
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 30px;
+  color: white;
+  background-color: #de6d56;
+}
+.quizcard2 {
+  background-color: #604399;
+}
+.quizcard3 {
+  background-color: #5d8ce7;
+}
+.quizcard4 {
+  background-color: #eeac4e;
+}
+
+.qcbody {
+  height: 80px;
+}
+.qcbody p {
+  font-size: 18px;
+  font-weight: bolder;
+}
+.qctext {
+  display: flex;
+}
+.qctext .txt1 {
+  flex: 1;
+  justify-content: start;
+}
+
+.pagecontainer {
+  background-color: transparent;
+}
+.pagehead {
+  background-color: #5d8ce7;
+  color: white;
+  font-size: larger;
+}
+.pageform {
+  color: white;
+  width: 50%;
+  margin: 5% 25%;
+  padding: 5%;
+
+  border: 2px solid white;
+  border-radius: 20px;
+}
+.formdivider {
+  display: flex;
+}
+.formdivider > div {
+  flex: 1;
+}
+.formdivider .div1 {
+  align-self: center;
+  text-align: center;
+}
+
+/* common page css */
+.pagebtngrp {
+  margin-top: 20px;
+  padding: 0px 10%;
+  display: flex;
+}
+.pagebtngrp > * {
+  width: 50%;
+  padding: 10px 0px;
+  font-weight: bold;
+  margin: 10px;
+}
+.pagesubhead {
+  background-color: #604399;
+  color: white;
+  padding: 5px 2%;
+  font-weight: bold;
+  font-size: larger;
+
+  letter-spacing: 1px;
+}
+.pagesubhead > a > small {
+  color: white;
+  font-weight: bold;
+}
+.secondaryhead {
+  background-color: #604399;
+  color: white;
+  padding: 10px 2%;
+  font-weight: bold;
+  font-size: larger;
+  margin: 25px 0px;
+}
+.pagealert {
+  background-color: #5d8ce7;
+  color: gold;
+}
+.redirect {
+  color: black;
+}
+
+/* notice form */
+.noticeform {
+  width: 40%;
+  padding: 30px 5%;
+  margin: 0px 30%;
+}
+.form-head {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+.noticeform .btnbox {
+  margin-top: 20px;
+  padding: 0px 6%;
+  display: flex;
+}
+.noticeform .btnbox > * {
+  flex: 1;
+  padding: 10px;
+  margin: 0px 20px;
+}
+
+.card-body-icon {
+  position: absolute;
+  z-index: 0;
+  top: -1.25rem;
+  right: -1rem;
+  opacity: 0.4;
+  font-size: 5rem;
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+
+/* 
+    employee 
+*/
+
+/* notice card */
+.noticebox {
+  background-color: #604399;
+  overflow: hidden;
+  color: white;
+  border-radius: 40px;
+}
+.notice-title {
+  letter-spacing: 2px;
+  font-weight: bolder;
+  font-size: 25px;
+}
+.noticefooter {
+  font-size: large;
+  font-weight: 500;
+  color: white;
+}
+.noticefooter span {
+  font-weight: bolder;
+  font-size: large;
+  color: #f44773;
+}
+
+/* profile page */
+#tbox {
+  width: 40%;
+  margin: 20px 30%;
+  text-align: center;
+}
+.tablebox {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.tablebox tr {
+  border: 2px solid white;
+  color: white;
+}
+.tablebox tr > * {
+  border-right: 2px solid white;
+  padding-left: 20px;
+}
+.tablebox thead {
+  background-color: rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: large;
+  letter-spacing: 2px;
+}
+.tablebox tbody {
+  font-size: large;
+  letter-spacing: 2px;
+}
+.tablebox tbody td {
+  vertical-align: middle;
+  align-self: center;
+}
+
+/* 
+    organizer  
+  */
+
+/* add quiz */
+.addquiz {
+  width: 40%;
+  padding: 30px 5%;
+  margin: 20px 30%;
+}
+.addquiz input,
+.addquiz select {
+  width: 80%;
+  margin: 20px 10%;
+  background-color: white;
+  border: 1px solid black;
+  padding: 8px 25px;
+}
+.addquiz .btnbox {
+  margin-top: 20px;
+  padding: 0px 5%;
+  display: flex;
+}
+.addquiz .btnbox > * {
+  flex: 1;
+  padding: 10px;
+  margin: 0px 20px;
+}
+
+/* add question */
+.addquestion {
+  width: 40%;
+  margin: 20px 30%;
+  padding: 30px 5%;
+}
+.addquestion #div_id_text label {
+  text-transform: uppercase;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+.addquestion #div_id_text div input {
+  width: 100%;
+  padding: 8px 12px;
+}
+.addquestion .btnbox {
+  margin-top: 20px;
+  padding: 0px 6%;
+  display: flex;
+}
+.addquestion .btnbox > * {
+  flex: 1;
+  padding: 10px;
+  margin: 0px 20px;
+}
+
+div[id^="div_id_answers-"] input {
+  width: 100%;
+  padding: 4px 12px;
+}
+
+/* delete */
+.deletion {
+  padding: 20px 5%;
+  color: white;
+}
+.deletion h4 {
+  color: #5d8ce7;
+  font-size: 28px;
+  font-weight: 700;
+}
+.deletion .btnbox > * {
+  width: 15%;
+  margin: 10px 1%;
+}
+
+/* add book */
+.addbook {
+  width: 50%;
+  margin: 20px 25%;
+  padding: 2%;
+  color: white;
+}
+.addbook::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.addbook input,
+.addbook select {
+  width: 75%;
+  float: left;
+  padding: 6px 20px;
+  background-color: white;
+  color: black;
+}
+.addbook .labels {
+  display: flex;
+  width: 25%;
+  float: left;
+  padding: 6px 10px 0px;
+  margin: 10px 0px;
+}
+.addbook button {
+  width: 30%;
+  padding: 12px 0px;
+  margin: 20px 35% 0px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* list books */
+.btngrp {
+  margin-top: 20px;
+  display: flex;
+}
+.btngrp > * {
+  flex: 1;
+  padding: 10px 0;
+  margin: 0px 10%;
+  font-size: large;
+  font-weight: bold;
+}
+
+/* 
+   admin
+  */
+
+.regform {
+  width: 40%;
+  padding: 30px 5%;
+  margin: 20px 30%;
+}
+.reginput input[type="text"],
+.reginput input[type="password"] {
+  width: 100%;
+  padding: 6px 20px;
+  margin: 10px 0px;
+  background-color: white;
+  border: 1px solid black;
+}
+.reginput button {
+  width: 30%;
+  font-weight: bold;
+  font-size: large;
+  margin: 10px 35%;
+}
+.reginput .clrblock {
+  display: flex;
+}
+.reginput .clrblock .div1 {
+  color: white;
+  flex: 1;
+  text-align: center;
+  align-self: center;
+}
+.reginput .clrblock .div2 {
+  flex: 2;
+}
+.reginput .clrblock .div2 input[type="color"] {
+  width: 80%;
+  margin-left: 10%;
+}
+.regblock {
+  display: flex;
+  color: white;
+}
+.regblock > * {
+  flex: 1;
+}
+.regblock .div1 {
+  text-align: center;
+  align-self: center;
+}
+
+/* notice */
+.btnstore {
+  margin: 16px;
+}
+.formbody {
+  padding: 5% 30%;
+}
+
+.formbody input:not(input[type="file"]) {
+  width: 100%;
+  height: 55px;
+  border-radius: 30px;
+  border: 3px solid palevioletred;
+  padding-left: 30px;
+  margin-top: 15px;
+  font-weight: 600;
+}
+#save {
+  width: 100%;
+  height: 55px;
+  border-radius: 30px;
+  margin: 20px 0;
+}
+#picfield {
+  padding: 0px 20px;
+  margin: 10px 0;
+  color: white;
+}
+.picselect {
+  width: 40%;
+  float: left;
+  font-weight: 600;
+}
+.formbody input[type="file"] {
+  width: 60%;
+  float: left;
+  font-weight: 600;
+}

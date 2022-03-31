@@ -4,47 +4,39 @@
 {% load widget_tweaks %}
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success active">Register Employee</li>
-        </ol> 
-
-        <div class="card mb-3 fieldbox">
-          <div class="card-header bg-success cardhead">
-            <i class="fas fa-table"></i>
-              Please Add New Employee For FunZone
+    <div class="homecontainer">
+      <div class="card-header pagehead">
+        <i class="fas fa-table"></i>
+          Please Add New Employee For FunZone
+      </div>
+      <div class="card-body pagecontainer regform">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            {{ message }}
           </div>
-          <div class="card-body cardbody regform">
-            {% for message in messages %}
-              <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                {{ message }}
-              </div>
-            {% endfor %}
-            <form method="post" novalidate class="reginput">
-              {% csrf_token %}
-              <div class="form-group">
-                {% render_field form.username type="text" class="form-control" placeholder="Username" %}
-              </div>
-              <div class="form-group">
-                {% render_field form.password1 type="password" class="form-control" placeholder="Password" %}
-              </div>
-              <div class="form-group">
-                {% render_field form.password2 type="password" class="form-control" placeholder="Confirm Password" %}
-              </div>
-              <div class="regblock">
-                <div class="div1">
-                  <label>Interests</label>
-                </div>
-                <div class="div2">
-                  {% render_field form.interests %}
-                </div>
-              </div>
-              <button type="submit" class="btn btn-success">SUBMIT</button>
-            </form>
+        {% endfor %}
+        <form method="post" novalidate class="reginput">
+          {% csrf_token %}
+          <div class="form-group">
+            {% render_field form.username type="text" class="form-control" placeholder="Username" %}
           </div>
-        </div>
+          <div class="form-group">
+            {% render_field form.password1 type="password" class="form-control" placeholder="Password" %}
+          </div>
+          <div class="form-group">
+            {% render_field form.password2 type="password" class="form-control" placeholder="Confirm Password" %}
+          </div>
+          <div class="regblock">
+            <div class="div1">
+              <label>Interests</label>
+            </div>
+            <div class="div2">
+              {% render_field form.interests %}
+            </div>
+          </div>
+          <button type="submit" class="btn primarybtn">Submit</button>
+        </form>
+      </div>
     </div>
 </div>
 {% endblock body %}

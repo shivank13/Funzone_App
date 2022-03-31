@@ -6,39 +6,32 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success active">Update Interests</li>
-        </ol>
-    
-        <div class="card mb-3 fieldbox">
-            <div class="card-header bg-success cardhead">
-                <i class="fas fa-table text-white"></i>
-                Please Select Interests
+    <div class="homecontainer" >
+        <div class="card-header pagehead">
+            <i class="fas fa-table"></i>
+            Please Select Interests
+        </div>
+        <div class="card-body pagecontainer">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                {{ message }}
             </div>
-            <div class="card-body">
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                    {{ message }}
+            {% endfor %}
+            <form method="post" novalidate class="pageform">
+                {% csrf_token %}
+                <div class="formdivider">
+                    <div class="div1">
+                        INTERESTS
+                    </div>
+                    <div class="div2">
+                        {% render_field form.interests %}
+                    </div>
                 </div>
-                {% endfor %}
-                <form method="post" novalidate class="form-interests">
-                    {% csrf_token %}
-                    <div class="divider">
-                        <div class="div1">
-                            INTERESTS
-                        </div>
-                        <div class="div2">
-                            {% render_field form.interests %}
-                        </div>
-                    </div>
-                    <div class="btnbox">
-                        <button type="submit" class="btn btn-success">SAVE CHANGES</button>
-                        <a href="{% url 'employee' %}" class="btn btn-danger">NEVERMIND</a>
-                    </div>
-                </form>
-            </div>
+                <div class="pagebtngrp">
+                    <button type="submit" class="btn primarybtn">SAVE</button>
+                    <a href="{% url 'employee' %}" class="btn secondarybtn">CANCEL</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

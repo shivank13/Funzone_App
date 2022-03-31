@@ -1,29 +1,23 @@
 {% extends 'dashboard/organizer/base.html' %}
 {% load static %}
 
-
 {% block body %}
 <div id="content-wrapper" class="home">
-  <div class="container-fluid">
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'organizer' %}">Dashboard</a></li>
-          <li class="breadcrumb-item text-success">Manage Books</li>
-          <li class="breadcrumb-item text-danger active">Read And Update Books</li>
-      </ol>
-      <div class="card m-3 p-3 fieldbox">
-          <div class="card-header bg-success cardhead"
+    <div class="homecontainer">
+        <div class="card-header pagehead">
             <i class="fas fa-table"></i>
             List of Books Posted
-          </div>
+        </div>
 
-          {% for message in messages %}
+        <div class="card-body pagecontainer">
+            {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-              {{ message }}
+                {{ message }}
             </div>
-          {% endfor %}
+            {% endfor %}
 
-          <table class="table mb-0 tablebox" >
-            <thead>
+            <table class="table mb-0 tablebox">
+                <thead>
                 <tr>
                     <th>Cover</th>
                     <th>Book Title</th>
@@ -31,66 +25,66 @@
                     <th>Download</th>
                     <th>Update</th>
                 </tr>
-            </thead>
-            <tbody>
-              {% if books%}
-              {% for book in books%}
+                </thead>
+                <tbody>
+                {% if books%}
+                {% for book in books%}
                 <tr>
-                  <td>
-                    {% if book.cover %}
-                     <img src="{{ book.cover.url }}" alt="" style="width:100px; height: 100px">
-                    {% else %}
-                    <span class="text-muted">No cover</span>
-                    {% endif %}
-                  </td>
-                  <td>{{ book.title }}</td>
-
-                  <td>
-                    {% if book.file %}
-                      <a href="{{ book.file.url }}" class="btn btn-outline-primary" target="_blank">
-                    View PDF</a>
-                    {% else %}
-                    <span class="text-muted">No PDF</span>
-                    {% endif %}
-                  </td>
-                  <td>
-                    {% if book.cover %}
-                      <a href="{{ book.file.url }}" download class="btn btn-outline-success">
-                    Download PDF</a>
-                    {% else %}
-                    <span class="text-muted">No PDF</span>
-                    {% endif %}
-                  </td>
-                  <td>
-                    <a href="{% url 'update_book' book.pk %}"><button type="button" class="btn btn-success">Update Book</button>
-                  </td>
+                    <td>
+                        {% if book.cover %}
+                        <img src="{{ book.cover.url }}" alt="{{ book.title }}"
+                             style="width:100px; height: 100px">
+                        {% else %}
+                        <span class="text-muted">No cover</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ book.title }}</td>
+                    <td>
+                        {% if book.file %}
+                        <a href="{{ book.file.url }}" class="btn secondarybtn"
+                           target="_blank">View PDF</a>
+                        {% else %}
+                        <span class="text-muted">No PDF</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if book.cover %}
+                        <a href="{{ book.file.url }}" download class="btn secondarybtn">
+                            Download PDF</a>
+                        {% else %}
+                        <span class="text-muted">No PDF</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'update_book' book.pk %}"><button type="button" class="btn primarybtn">Update Book</button>
+                    </td>
                 </tr>
-              {% endfor %}
-              {% endif %}
-            </tbody>
-          </table>
-          {% if is_paginated %}
-                <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-                    {% else %}
-                    <li class="disabled"><span>&laquo;</span></li>
-                    {% endif %}
-                    {% for i in paginator.page_range %}
-                    {% if page_obj.number == i %}
-                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                    {% else %}
-                    <li><a href="?page={{ i }}">{{ i }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-                    {% else %}
-                    <li class="disabled"><span>&raquo;</span></li>
-                    {% endif %}
-                </ul>
-          {% endif %}
+                {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+            {% if is_paginated %}
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+            {% endif %}
         </div>
-  </div>
+    </div>
 </div>
 {% endblock %}

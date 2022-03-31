@@ -2,18 +2,12 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-  <div class="container-fluid" id="parentcont">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
-          <li class="breadcrumb-item text-success active">Register Interest</li>
-      </ol>
-      <div class="card mb-3 fieldbox">
-          <div class="card-header bg-success cardhead">
+  <div class="homecontainer">
+          <div class="card-header pagehead">
             <i class="fas fa-table"></i>
             Register Interest
           </div>
-          <div class="card-body cardbody regform">
+          <div class="card-body pagecontainer regform">
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
                     {{ message }}
@@ -25,39 +19,18 @@
               <input type="text" name="name" placeholder="Interest">
               <div class="clrblock">
                 <div class="div1">
-                  <label for="head" class="text-info">SELECT COLOR :</label>
+                  <label for="head">SELECT COLOR :</label>
                 </div>
                 <div class="div2">
                   <input type="color" id="head" name="color"
                        value="#000">
                 </div>
               </div>
-            	<button type="submit" class="btn btn btn-success">SUBMIT</button>
+            	<button type="submit" class="btn primarybtn">Submit</button>
             </form>
           </div>
       </div>
   </div>
-</div>
-
-
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color: blue">Ready to Delete?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body" style="color: red;"><h5> Select "Delete" below if you want to Delete</h5></div>
-            <div class="modal-footer">
-                <button class="btn btn-success" type="button" data-dismiss="modal">Cancel</button>
-               <a class="btn btn-danger" href="">Delete</a>
-            </div>
-        </div>
-    </div>
 </div>
 {% endblock body %}
 

@@ -1,51 +1,42 @@
 {% extends 'dashboard/admin/base.html' %}
 {% load static %}
-
+  
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Announcements</li>
-            <li class="breadcrumb-item text-danger active">Announcements List</li>
-        </ol>
-        <div class="card mb-3 fieldbox">
-            <div class="card-header bg-success cardhead">
-                <i class="fas fa-table"></i>
-                List of Announcements Posted
-            </div>
-            <div class="card card-body fieldbox">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}    
+    <div class="homecontainer">
+        <div class="card-header pagehead">
+            <i class="fas fa-table"></i>
+            List of Announcements Posted
+        </div>
+        <div class="card-body pagecontainer">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}    
 
-                <div class="row">
-                    {% for chat in object_list %}
-                    <div class="col-lg-6 mb-3">
-                        <div class="card p-3 text-white noticebox o-hidden h-100">
-                            <div class="cardbody">
-                                <div class="card-body-icon">
-                                    <i class="fas fas fa-bullhorn"></i>
-                                </div>
-                                <h5 class="m-3 notice-title text-white">{{ chat|linebreaks }}</h5>
+            <div class="row">
+                {% for chat in object_list %}
+                <div class="col-lg-6 noticebox p-3">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fas fa-bullhorn"></i>
+                        </div>
+                        <h5 class="notice-title text-white">{{ chat|linebreaks }}</h5>
 
-                                <div class="m-3 text-warning noticefooter"> 
-                                    POSTED BY 
-                                    <span class="text-success">{{chat.user}}</span> 
-                                    AT 
-                                    <span class="text-success">{{chat.posted_at}}</span> 
-                                </div>
-                            </div>
+                        <div class="noticefooter"> 
+                            POSTED BY 
+                            <span class="details">{{chat.user}}</span> 
+                            AT 
+                            <span class="details">{{chat.posted_at}}</span> 
                         </div>
                     </div>
-                    {% empty %}
-                    <h1 class="heading">NO ANNOUNCEMENTS YET!1!</h1><br>
-                    {% endfor %}
                 </div>
-                
+                {% empty %}
+                <h1 class="heading">NO ANNOUNCEMENTS YET!1!</h1><br>
+                {% endfor %}
             </div>
+            
         </div>
     </div>  
 </div>

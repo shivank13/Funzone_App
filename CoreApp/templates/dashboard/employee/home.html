@@ -3,67 +3,55 @@
 
 {% block body %}
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'employee' %}">Dashboard</a></li>
-            <li class="breadcrumb-item active">Overview</li>
-        </ol>
-
-        <!-- Icon Cards-->
+    <div class="homecontainer">
         <div class="row m-3 p-3">
-            <div class="col-xl-6">
-                <div class="card text-white bg-success o-hidden">
-                    <div class="card-body">
-                        <div class="card-body-icon">
-                            <i class="fas fa-book-reader"></i>
-                        </div>
-                        <div class="mr-5"> {{ interest }}</div>
-                    </div>
-                    <div class="card-footer text-white">
-                        <span>Total Number of Interests</span>
-                    </div>
+            <div class="col-xl-3">
+                <div class="overview">
+                    <div class="txt1"> {{ interest }}</div>
+                    <div class="txt2">INTERESTS</div>
                 </div>
             </div>
-            <div class="col-xl-6">
-                <div class="card text-white bg-danger o-hidden">
-                    <div class="card-body">
-                        <div class="card-body-icon">
-                            <i class="fas fa-fw fa-user"></i>
-                        </div>
-                        <div class="mr-5">{{ employee }}</div>
-                    </div>
-                    <div class="card-footer text-white">
-                        <span>Total No Of Users</span>
-                    </div>
+            <div class="col-xl-3">
+                <div class="overview">
+                    <div class="txt1">{{ employee }}</div>
+                    <div class="txt2">EMPLOYEES</div>
                 </div>
             </div>
         </div>
-        <div class="row fieldbox p-3 m-3">
-            {% for quiz in quizzes %}
-                <div class="col-xl-3 qcardcontainer">
-                    <div class="card text-white bg-primary">
-                        <div class="card-body qcardbody">
-                          <h5 class="card-title">{{ quiz.name }}</h5>
-                          <p class="card-text qcardtext">
-                            INTEREST: <span>{{ quiz.interest.get_html_badge }}</span>
-                            <br/>
-                            QUESTIONS: {{ quiz.questions_count }}
-                          </p>
+        <div class="row m-3 p-3">
+            <div class="row col-xl-9">
+                {% for quiz in quizzes %}
+                    <div class="col-xl-4">
+                        <div class="
+                            quizcard
+                            {% if forloop.counter|divisibleby:2 %} quizcard2 {% endif %}
+                            {% if forloop.counter|divisibleby:3 %} quizcard3 {% endif %}
+                            {% if forloop.counter|divisibleby:4 %} quizcard4 {% endif %}
+                            "
+                        >
+                            <div class="row qcbody">
+                                <p class="float-left col-xl-9" >Quiz: {{ quiz.name }}</p>
+                                <a href="{% url 'start_quiz' quiz.pk %}" class="col-xl-3">
+                                    <img  src='{% static "img/pages/Vector.svg" %}' width="90%">
+                                </a>
+                            </div>
+                            <div class="qctext">
+                                <div class="txt1">{{ quiz.questions_count }} Questions</div>
+                                <div class="txt2">{{ quiz.interest }}</div>
+                            </div>
                         </div>
-                        <div class="card-footer qcardfooter">
-                            <a href="{% url 'start_quiz' quiz.pk %}" 
-                                class="btn btn-danger">Start Quiz</a>
-                        </div>
-                      </div>
-                </div>
-            {% empty %}
-                <div class="card mb-3 fieldbox">
-                    <div class="card-header bg-info cardhead">
-                        No quiz matching your interests right now
                     </div>
-                </div>
-            {% endfor %}
+                {% empty %}
+                    <div class="card mb-3 fieldbox">
+                        <div class="card-header bg-warning cardhead">
+                            No quiz matching your interests right now
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-xl-3">
+                <!-- ANNOUNCEMENTS -->
+            </div>
         </div>                  
     </div>
 </div>
