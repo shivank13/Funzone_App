@@ -19,6 +19,10 @@ ALLOWED_HOSTS = [
     '*',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://hashedinfunzone-urtjok3rza-wl.a.run.app',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
