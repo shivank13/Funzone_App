@@ -22,7 +22,6 @@ WORKDIR /code
 RUN pip3 install --upgrade pip wheel
 COPY requirements.txt /code/
 RUN pip3 install -r requirements.txt
-#RUN python3 -m spacy download en_core_web_sm
 COPY . /code/
-EXPOSE 8080
-CMD python3 manage.py runserver 0.0.0.0:8080 --noreload
+EXPOSE 8000
+CMD python3 manage.py runserver 0.0.0.0:8000 --noreload
