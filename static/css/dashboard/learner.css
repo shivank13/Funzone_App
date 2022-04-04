@@ -474,3 +474,28 @@ div[id^="div_id_answers-"] input {
   float: left;
   font-weight: 600;
 }
+
+
+/* quiz layout */
+#id_answer{
+  display: inline;
+}
+#id_answer > div{
+  display: inline-block;
+  width: 50%;
+  padding: 0px 30px;
+}
+#id_answer > div > label{
+  width: 100%;
+  padding: 20px 0px;
+  text-align: center;
+  background-color: rgba(93, 140, 231, 0.4);
+  border-radius: 30px;
+  font-size: large;
+}
+.options button{
+  width: 12%;
+  margin: 20px 0 0 5%;
+  font-weight: bolder;
+  font-size: large;
+}

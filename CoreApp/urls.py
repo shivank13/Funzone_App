@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from GameApp.views import index, game
 
 urlpatterns = [
     path('', views.login_form, name='login_form'),
@@ -19,6 +20,9 @@ urlpatterns = [
     path('emp_notice/', views.EmployeeAnnouncementsListView.as_view(), name='emp_announcements'),
     path('emp_profile/', views.emp_profile, name='emp_profile'),
     path('emp_create_profile/', views.emp_create_profile, name='emp_create_profile'),
+
+    path('play/', index, name='index'),
+    path('play/<room_code>', game),
 
     # organizer dashboard
     path('organizer/', views.home_organizer, name='organizer'),
@@ -50,6 +54,22 @@ urlpatterns = [
     path('reg_organizer/', views.RegisterOrganizerView.as_view(), name='reg_organizer'),
     path('reg_employee/', views.RegisterEmployeeView.as_view(), name='reg_employee'),
     path('reg_interest/', views.register_interest, name='reg_interest'),
+
+    path('adm_add_quiz/', views.AdminQuizAddView.as_view(), name='adm_add_quiz'),
+    path('adm_update_quiz/<int:pk>/', views.AdminQuizUpdateView.as_view(), name='adm_update_quiz'),
+    path('adm_quiz/<int:pk>/delete/', views.AdminQuizDeleteView.as_view(), name='adm_delete_quiz'),
+    path('adm_edit_quizlist/', views.AdminEditQuizListView.as_view(), name='adm_edit_quizlist'),
+    path('adm_quiz/<int:pk>/results/', views.AdminQuizResultsView.as_view(), name='adm_quiz_results'),
+
+    path('adm_add_question/<int:pk>', views.adm_add_question, name='adm_add_question'),
+    path('adm_quiz/<int:quiz_pk>/question/<int:question_pk>/update', views.adm_update_question, name='adm_update_question'),
+    path('adm_quiz/<int:quiz_pk>/question/<int:question_pk>/delete/', views.AdminQuestionDeleteView.as_view(),
+            name='adm_delete_question'),
+
+    path('adm_publish_book/', views.adm_publish_book, name='adm_publish_book'),
+    path('adm_allbooks/', views.AdminAllBooksList.as_view(), name='adm_allbooks'),
+    path('adm_add_book/', views.adm_add_book, name='adm_add_book'),
+    path('adm_update_book/<int:pk>', views.adm_update_book, name='adm_update_book'),  
 
     path('adm_add_notice/', views.AdminAddNoticeView.as_view(), name='adm_add_notice'),
     path('adm_allnotices/', views.AdminAnnouncementsView.as_view(), name='adm_allnotices'),

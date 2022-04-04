@@ -1,0 +1,76 @@
+{% extends 'dashboard/admin/base.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div id="content-wrapper" class="home">
+  <div class="homecontainer">
+        <div class="card-header pagehead">
+          <i class="fas fa-table"></i>
+          Add Question To Quiz
+        </div>
+            <div class="card-body pagecontainer">
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                  {{ message }}
+                </div>
+              {% endfor %}
+              
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="{% url 'adm_edit_quizlist' %}">My Quizzes</a>
+                </li>
+                <li class="breadcrumb-item text-success active" aria-current="page">{{ quiz.name }}</li>
+              </ol>
+              <form method="post" novalidate class="addquiz">
+                  {% csrf_token %}
+                  {% render_field form.name type="text" class="form-control" %}
+                  {% render_field form.interest type="dropdown" class="form-control" %}
+                  <div class="btnbox">
+                    <a href="{% url 'adm_edit_quizlist' %}" class="btn primarybtn" role="button">Save</a>
+                    <a href="{% url 'adm_delete_quiz' quiz.pk %}" class="btn secondarybtn" role="button">Delete</a>
+                  </div>
+              </form>
+                <div class="card">
+                  <div class="card-header">
+                    <div class="row text-center">
+                      <div class="col-sm-6 text-danger">
+                        <strong>Questions</strong>
+                      </div>
+                      <div class="col-sm-6 text-success">
+                        <strong>Answers</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list-group list-group-flush list-group-formset">
+                    {% for question in questions %}
+                      <div class="list-group-item">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <a href="{% url 'adm_update_question' quiz.pk question.pk %}">{{ question.text }}</a>
+                          </div>
+                          <div class="col-sm-6 text-primary">
+                            {{ question.answers_count }}
+                          </div>
+                        </div>
+                      </div>
+                    {% empty %}
+                      <div class="list-group-item text-center">
+                        <p class="text-muted font-italic mb-0">You haven't created any questions yet. Go ahead and <a href="{% url 'add_question' quiz.pk %}">add the first question</a>.</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="card-footer">
+                    <a href="{% url 'adm_add_question' quiz.pk %}" class="btn btn-primary btn-sm">Add question</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

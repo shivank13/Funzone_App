@@ -1,0 +1,30 @@
+{% extends 'dashboard/admin/base.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div id="content-wrapper" class="home">
+  <div class="homecontainer">
+        <div class="card-header pagehead">
+              <i class="fas fa-table"></i>
+                Delete Quiz
+        </div>
+        <div class="card-body pagecontainer">
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+            {{ message }}
+          </div>
+          {% endfor %}
+          <div class="deletion">
+            <h4>Confirm deletion?</h4>
+            <p class="lead">Are you sure you want to delete the quiz <strong>"{{ quiz.name }}"</strong>?</p>
+            <form method="post" class="btnbox">
+              {% csrf_token %}
+              <button type="submit" class="btn primarybtn">Yes, I'm sure</button>
+              <a href="{% url 'adm_update_quiz' quiz.pk %}" class="btn secondarybtn" role="button">Nevermind</a>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,31 @@
+{% extends 'dashboard/admin/base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+<div id="content-wrapper" class="home">
+    <div class="homecontainer">
+        <div class="card-header pagehead">
+            <i class="fas fa-table text-primary"></i>
+            Update Books
+        </div>
+        <div class="card-body pagecontainer">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <form action="" method="POST" enctype="multipart/form-data" class="deletion">
+                {% csrf_token %}
+                <div style="margin-bottom: 20px;">
+                    <input type="file" id="myFile" name="file" placeholder="Report Attachment" 
+                    enctype="multipart/form-data">
+                </div>
+                
+                <button type="submit" class="btn primarybtn" href="">Update Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

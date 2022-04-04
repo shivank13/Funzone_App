@@ -1,0 +1,32 @@
+{% extends 'dashboard/admin/base.html' %}
+
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block body %}
+<div id="content-wrapper" class="home">
+    <div class="homecontainer">
+        <div class="card-header pagehead">
+            <i class="fas fa-table"></i>
+            Add Quiz
+        </div>
+        <div class="card-body pagecontainer">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            <form method="post" novalidate class="addquiz">
+                {% csrf_token %}
+                {% render_field form.name type="text" class="form-control" placeholder="Name" %}
+                {% render_field form.interest type="dropdown" class="form-control" placeholder="Interests" %}
+                <div class="btnbox">
+                    <button type="submit" class="btn primarybtn">Save</button>
+                    <a href="{% url 'owner' %}" class="btn secondarybtn">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body %}

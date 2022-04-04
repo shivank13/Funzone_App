@@ -412,27 +412,6 @@ class QuizDeleteView(DeleteView):
         return self.request.user.quizzes.all()
 
 
-class AddNoticeView(CreateView):
-    form_class = PostForm
-    model = Announcement
-    template_name = 'dashboard/organizer/add_notice.html'
-    success_url = reverse_lazy('allnotices')
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.save()
-        return super().form_valid(form)
-
-
-class OrganizerAnnouncementsView(LoginRequiredMixin, ListView):
-    model = Announcement
-    template_name = 'dashboard/organizer/announcements.html'
-
-    def get_queryset(self):
-        return Announcement.objects.filter(posted_at__lt=timezone.now()).order_by('posted_at')
-
-
 def publish_book(request):
     if request.method == 'POST':
         title = request.POST['title']
@@ -483,6 +462,28 @@ def update_book(request, pk):
         return redirect('allbooks')
     else:
         return render(request, 'dashboard/organizer/update_book.html')
+
+
+
+class AddNoticeView(CreateView):
+    form_class = PostForm
+    model = Announcement
+    template_name = 'dashboard/organizer/add_notice.html'
+    success_url = reverse_lazy('allnotices')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+
+class OrganizerAnnouncementsView(LoginRequiredMixin, ListView):
+    model = Announcement
+    template_name = 'dashboard/organizer/announcements.html'
+
+    def get_queryset(self):
+        return Announcement.objects.filter(posted_at__lt=timezone.now()).order_by('posted_at')
 
 
 def org_profile(request):
@@ -574,6 +575,215 @@ def register_interest(request):
         return redirect('reg_interest')
     else:
         return render(request, 'dashboard/admin/reg_interest.html')
+
+
+class AdminQuizAddView(CreateView):
+    model = Quiz
+    fields = ('name', 'interest')
+    template_name = 'dashboard/admin/quiz/add_quiz.html'
+
+    def form_valid(self, form):
+        quiz = form.save(commit=False)
+        quiz.owner = self.request.user
+        quiz.save()
+        messages.success(self.request, 'Quiz created, Go A Head And Add Questions')
+        return redirect('adm_update_quiz', quiz.pk)
+
+
+class AdminQuizUpdateView(UpdateView):
+    model = Quiz
+    fields = ('name', 'interest')
+    template_name = 'dashboard/admin/quiz/update_quiz.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['questions'] = self.get_object().questions.annotate(answers_count=Count('answers'))
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        return self.request.user.quizzes.all()
+
+    def get_success_url(self):
+        return reverse('adm_update_quiz', kwargs={'pk', self.object.pk})
+
+
+def adm_add_question(request, pk):
+    quiz = get_object_or_404(Quiz, pk=pk, owner=request.user)
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.quiz = quiz
+            question.save()
+            messages.success(request, 'You may now add answers/options to the question.')
+            return redirect('adm_update_question', quiz.pk, question.pk)
+    else:
+        form = QuestionForm()
+
+    return render(request, 'dashboard/admin/question/add_question.html', {'quiz': quiz, 'form': form})
+
+
+def adm_update_question(request, quiz_pk, question_pk):
+    quiz = get_object_or_404(Quiz, pk=quiz_pk, owner=request.user)
+    question = get_object_or_404(Question, pk=question_pk, quiz=quiz)
+
+    AnswerFormatSet = inlineformset_factory(
+        Question,
+        Answer,
+        formset=BaseAnswerInlineFormSet,
+        fields=('text', 'is_correct'),
+        min_num=2,
+        validate_min=True,
+        max_num=10,
+        validate_max=True
+    )
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST, instance=question)
+        formset = AnswerFormatSet(request.POST, instance=question)
+        if form.is_valid() and formset.is_valid():
+            with transaction.atomic():
+                formset.save()
+                formset.save()
+            messages.success(request, 'Question And Answers Saved Successfully')
+            return redirect('adm_update_quiz', quiz.pk)
+    else:
+        form = QuestionForm(instance=question)
+        formset = AnswerFormatSet(instance=question)
+    return render(request, 'dashboard/admin/question/update_question.html', {
+        'quiz': quiz,
+        'question': question,
+        'form': form,
+        'formset': formset
+    })
+
+
+class AdminQuestionDeleteView(DeleteView):
+    model = Question
+    context_object_name = 'question'
+    template_name = 'dashboard/admin/question/delete_question.html'
+    pk_url_kwarg = 'question_pk'
+
+    def get_context_data(self, **kwargs):
+        question = self.get_object()
+        kwargs['quiz'] = question.quiz
+        return super().get_context_data(**kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        question = self.get_object()
+        messages.success(request, 'The Question Was Deleted Successfully')
+        return super().delete(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return Question.objects.filter(quiz__owner=self.request.user)
+
+    def get_success_url(self):
+        question = self.get_object()
+        return reverse('adm_update_question', kwargs={'pk': question.quiz_id})
+
+
+class AdminEditQuizListView(ListView):
+    model = Quiz
+    ordering = ('name',)
+    context_object_name = 'quizzes'
+    template_name = 'dashboard/admin/quiz/edit_quizlist.html'
+
+    def get_queryset(self):
+        queryset = self.request.user.quizzes \
+            .select_related('interest') \
+            .annotate(questions_count=Count('questions', distinct=True)) \
+            .annotate(taken_count=Count('taken_quizzes', distinct=True))
+        return queryset
+
+
+class AdminQuizResultsView(DeleteView):
+    model = Quiz
+    context_object_name = 'quiz'
+    template_name = 'dashboard/admin/quiz/quiz_results.html'
+
+    def get_context_data(self, **kwargs):
+        quiz = self.get_object()
+        taken_quizzes = quiz.taken_quizzes.select_related('employee__user').order_by('-date')
+        total_taken_quizzes = taken_quizzes.count()
+        quiz_score = quiz.taken_quizzes.aggregate(average_score=Avg('score'))
+        extra_context = {
+            'taken_quizzes': taken_quizzes,
+            'total_taken_quizzes': total_taken_quizzes,
+            'quiz_score': quiz_score
+        }
+
+        kwargs.update(extra_context)
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        return self.request.user.quizzes.all()
+
+
+class AdminQuizDeleteView(DeleteView):
+    model = Quiz
+    context_object_name = 'quiz'
+    template_name = 'dashboard/admin/quiz/delete_quiz.html'
+    success_url = reverse_lazy('edit_quizlist')
+
+    def delete(self, request, *args, **kwargs):
+        quiz = self.get_object()
+        messages.success(request, 'The quiz %s was deleted with success!' % quiz.name)
+        return super().delete(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return self.request.user.quizzes.all()
+
+
+def adm_publish_book(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        interest_id = request.POST['interest_id']
+        cover = request.FILES['cover']
+        file = request.FILES['file']
+        current_user = request.user
+        user_id = current_user.id
+
+        a = Books(title=title, cover=cover, file=file, user_id=user_id, interest_id=interest_id)
+        a.save()
+        messages.success = (request, 'Books Was Published Successfully')
+        return redirect('adm_allbooks')
+    else:
+        messages.error = (request, 'Books Was Not Published Successfully')
+        return redirect('adm_add_book')
+
+
+class AdminAllBooksList(ListView):
+    model = Books
+    template_name = 'dashboard/admin/list_books.html'
+    context_object_name = 'books'
+    paginate_by = 20
+
+    def get_queryset(self):
+        return Books.objects.order_by('-id')
+
+
+def adm_add_book(request):
+    interests = Interest.objects.only('id', 'name')
+    context = {'interests': interests}
+    return render(request, 'dashboard/admin/add_books.html', context)
+
+
+def adm_update_book(request, pk):
+    if request.method == 'POST':
+        file = request.FILES['file']
+        file_name = request.FILES['file'].name
+
+        fs = FileSystemStorage()
+        file = fs.save(file.name, file)
+        # fileurl = fs.url(file)
+        file = file_name
+        print(file)
+
+        Books.objects.filter(id=pk).update(file=file)
+        messages.success = (request, 'Books was updated successfully!')
+        return redirect('adm_allbooks')
+    else:
+        return render(request, 'dashboard/admin/update_book.html')
 
 
 class AdminAddNoticeView(CreateView):

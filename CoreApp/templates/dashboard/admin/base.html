@@ -76,6 +76,55 @@
                 </a>
             </li>
 
+            <li class="nav-item active dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                href="">
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-question-answer-line"></i></div>
+                        <div class="linktext">Manage Quizzes</div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="{% url 'adm_add_quiz' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-add-line"></i></div>
+                            <div class="linktext">Add Quiz</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'adm_edit_quizlist' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-file-list-line"></i></div>
+                            <div class="linktext">List Quizzes</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
+
+            <li class="nav-item active dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                href="">
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-book-2-line"></i></div>
+                        <div class="linktext">Manage Books</div>
+                    </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="{% url 'adm_add_book' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-file-add-line"></i></div>
+                            <div class="linktext">Add Book</div>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'adm_allbooks' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-file-list-line"></i></div>
+                            <div class="linktext">List Books</div>
+                        </div>
+                    </a>
+                </div>
+            </li>
 
             <li class="nav-item active dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
