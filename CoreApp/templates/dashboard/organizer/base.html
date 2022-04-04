@@ -7,8 +7,8 @@
     <title>FUN ZONE</title>
 
     {% load static %}
-    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/four/css/bootstrap.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/common.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/learner.css' %}">
 </head>
@@ -28,7 +28,7 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item dropitem" href="" data-toggle="modal" data-target="#logoutModal">
                 LOGOUT                   
-                <i class="fa fa-sign-out-alt fa-fw text-primary"></i>
+                <i class="ri-logout-box-r-line text-primary" style="font-size: larger;"></i>
             </a>
             </div>
           </div>
@@ -44,57 +44,106 @@
             <hr width="80%" class="navdivider""/>
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'organizer' %}">
-                    <i class="fa fa-home" aria-hidden="true"></i>
-                    <span>Organizer Dashboard</span>
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-home-5-line"></i></div>
+                        <div class="linktext">Organizer Dashboard</div>
+                    </div>
                 </a>
             </li>
             <li class="nav-item active dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 href="">
-                    <i class="fa fa-th-list" aria-hidden="true"></i>
-                    <span>Manage Quizzes</span>
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-question-answer-line"></i></div>
+                        <div class="linktext">Manage Quizzes</div>
+                    </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="{% url 'add_quiz' %}">Add Quiz</a>
+                    <a class="dropdown-item" href="{% url 'add_quiz' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-add-line"></i></div>
+                            <div class="linktext">Add Quiz</div>
+                        </div>
+                    </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'edit_quizlist' %}">List Quiz</a>
+                    <a class="dropdown-item" href="{% url 'edit_quizlist' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-file-list-line"></i></div>
+                            <div class="linktext">List Quizzes</div>
+                        </div>
+                    </a>
                 </div>
             </li>
             <li class="nav-item active dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 href="">
-                    <i class="fas fa-pen"></i>
-                    <span>Manage Books</span>
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-book-2-line"></i></div>
+                        <div class="linktext">Manage Books</div>
+                    </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="{% url 'add_book' %}">Add Book</a>
+                    <a class="dropdown-item" href="{% url 'add_book' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-file-add-line"></i></div>
+                            <div class="linktext">Add Book</div>
+                        </div>
+                    </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'allbooks' %}">List Books</a>
+                    <a class="dropdown-item" href="{% url 'allbooks' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-file-list-line"></i></div>
+                            <div class="linktext">List Books</div>
+                        </div>
+                    </a>
                 </div>
             </li>
             <li class="nav-item active dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 href="">
-                    <i class="fas fa-bell"></i>
-
-                    <span>Announcements</span>
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-notification-line"></i></div>
+                        <div class="linktext">Manage Announcements</div>
+                    </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="{% url 'add_notice' %}">Post Announcements</a>
+                    <a class="dropdown-item" href="{% url 'add_notice' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-chat-upload-line"></i></div>
+                            <div class="linktext">Post Announcement</div>
+                        </div>
+                    </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'allnotices' %}">List Announcements</a>
+                    <a class="dropdown-item" href="{% url 'allnotices' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-file-list-line"></i></div>
+                            <div class="linktext">List Announcements</div>
+                        </div>
+                    </a>
                 </div>
             </li>
             <li class="nav-item active dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 href="">
-                    <i class="fas fa-user text-default"></i>
-                    <span>Manage Profile</span>
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-profile-line"></i></div>
+                        <div class="linktext">Manage Profile</div>
+                    </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="{% url 'org_profile' %}">View Profile</a>
+                    <a class="dropdown-item" href="{% url 'org_profile' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-eye-line"></i></div>
+                            <div class="linktext">View Profile</div>
+                        </div>
+                    </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'org_create_profile' %}">Create Profile</a>
+                    <a class="dropdown-item" href="{% url 'org_create_profile' %}">
+                        <div class="sideitem lighttext">
+                            <div class="icon"><i class="ri-add-line"></i></div>
+                            <div class="linktext">Create Profile</div>
+                        </div>
+                    </a>
                 </div>
             </li>
         </ul>

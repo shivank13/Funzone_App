@@ -1,6 +1,6 @@
 {% extends 'dashboard/employee/base.html' %}
 {% load static %}
-
+{% load myfilter %}
 {% block body %}
 <div id="content-wrapper" class="home">
   <div class="homecontainer">
@@ -20,10 +20,21 @@
               {% for taken_quiz in taken_quizzes %}
                   <div class="col-xl-3">
                       <div class="
-                          quizcard
-                          {% if forloop.counter|divisibleby:2 %} quizcard2 {% endif %}
-                          {% if forloop.counter|divisibleby:3 %} quizcard3 {% endif %}
-                          {% if forloop.counter|divisibleby:4 %} quizcard4 {% endif %}
+                            quizcard
+
+                            {% if forloop.counter|modulo:4 == 1 %} 
+                              quizcard1 
+                              {% else %}
+                              {% if forloop.counter|modulo:4 == 2 %} 
+                                quizcard2
+                                {% else %}
+                                {% if forloop.counter|modulo:4 == 3 %} 
+                                  quizcard3
+                                  {% else %}
+                                    quizcard4
+                                {% endif %}
+                              {% endif %}
+                            {% endif %} 
                           "
                       >
                           <div class="row qcbody">

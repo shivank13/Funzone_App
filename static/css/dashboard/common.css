@@ -17,8 +17,8 @@
 }
 .home {
   background-color: #141a44;
-  margin-top: 100px;
-  padding: 20px 2%;
+  margin-top: 150px;
+  padding: 0px 2%;
 }
 /* hiding arrow */
 .arrow,
@@ -48,10 +48,11 @@
   background-color: #141a44;
   width: 84%;
   margin-left: 16%;
-  height: 100px;
-  padding: 20px 3% 0px;
+  height: 150px;
+  padding: 16px 5% 0;
   color: white;
 }
+
 .welcome {
   line-height: 15px;
 }
@@ -62,6 +63,24 @@
   display: none;
 }
 
+
+.sideitem{
+  display: flex;
+  
+}
+.lighttext{
+  font-weight: normal;
+}
+.icon{
+  font-size: larger;
+  margin-right: 10px;
+  flex: 1;
+}
+.linktext{
+  font-size: large;
+  font-weight: bolder;
+  flex: 9;
+}
 .sidebar {
   width: 16%;
   min-height: 100vh;
@@ -78,7 +97,7 @@
   display: block;
   width: 100%;
   text-align: left;
-  padding: 1rem 10%;
+  padding: 1rem 20px;
   width: 300px;
 }
 .sidebar .nav-item .nav-logo {

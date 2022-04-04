@@ -1,6 +1,7 @@
 /* 
   common
 */
+
 .primarybtn {
   background: #f44773;
   border-radius: 50px;
@@ -68,6 +69,8 @@
   padding: 14px;
   margin-bottom: 30px;
   color: white;
+}
+.quizcard1 {
   background-color: #de6d56;
 }
 .quizcard2 {

@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+import django
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -56,7 +58,8 @@ ROOT_URLCONF = 'FunZone.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

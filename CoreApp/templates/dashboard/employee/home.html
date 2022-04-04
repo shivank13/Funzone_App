@@ -1,6 +1,6 @@
 {% extends 'dashboard/employee/base.html' %}
 {% load static %}
-
+{% load myfilter %}
 {% block body %}
 <div id="content-wrapper" class="home">
     <div class="homecontainer">
@@ -23,15 +23,34 @@
                 {% for quiz in quizzes %}
                     <div class="col-xl-4">
                         <div class="
-                            quizcard
-                            {% if forloop.counter|divisibleby:2 %} quizcard2 {% endif %}
-                            {% if forloop.counter|divisibleby:3 %} quizcard3 {% endif %}
-                            {% if forloop.counter|divisibleby:4 %} quizcard4 {% endif %}
+                                quizcard
+
+                                {% if forloop.counter|modulo:4 == 1 %} 
+                                quizcard1 
+                                {% else %}
+                                {% if forloop.counter|modulo:4 == 2 %} 
+                                    quizcard2
+                                    {% else %}
+                                    {% if forloop.counter|modulo:4 == 3 %} 
+                                    quizcard3
+                                    {% else %}
+                                        quizcard4
+                                    {% endif %}
+                                {% endif %}
+                                {% endif %} 
                             "
                         >
                             <div class="row qcbody">
                                 <p class="float-left col-xl-9" >Quiz: {{ quiz.name }}</p>
-                                <a href="{% url 'start_quiz' quiz.pk %}" class="col-xl-3">
+                                <a href=""  
+                                    data-quiz="{{ quiz.name }}" 
+                                    data-count="{{ quiz.questions_count }}"
+                                    data-interest="{{ quiz.interest }}"
+                                    data-href="{% url 'start_quiz' quiz.pk %}"
+                                    class="col-xl-3 startquiz" 
+                                    data-toggle="modal" 
+                                    data-target="#startModal"
+                                >
                                     <img  src='{% static "img/pages/Vector.svg" %}' width="90%">
                                 </a>
                             </div>
@@ -51,8 +70,44 @@
             </div>
             <div class="col-xl-3">
                 <!-- ANNOUNCEMENTS -->
+                
             </div>
         </div>                  
     </div>
 </div>
+
+<div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Start?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="modalbody">
+        </div>
+        <div id="modalinfo1">
+        </div>
+        <div id="modalinfo2">
+        </div>
+      </div>
+      <div class="modal-footer" id="modalfooter">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" href="" id="startlink">Start</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.startquiz').click(function(){
+    $('#modalbody').html("Quiz : '" + $(this).data('quiz') + "'");
+    $('#modalinfo1').html("Questions : " + $(this).data('count'));
+    $('#modalinfo2').html("Interest : " + $(this).data('interest'));
+    $('#startlink').attr("href", $(this).data('href'));
+  });
+</script>
 {% endblock body%}

@@ -60,9 +60,14 @@ class EmployeeSignUpView(CreateView):
         kwargs['user_type'] = 'employee'
         return super().get_context_data(**kwargs)
 
+    def form_invalid(self, form):
+        messages.info(self.request, "Check Password And Select Atleast 2 Interests")
+        return super().form_invalid(form)
+
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
+        messages.info(self.request, "Employee Created Successfully")
         return redirect('login_form')
 
 
