@@ -18,8 +18,8 @@
                 </div>
             </div>
         </div>
-        <div class="row m-3 p-3">
-            <div class="row col-xl-9">
+        <div class="listquiz">
+            <div class="row">
                 {% for quiz in quizzes %}
                     <div class="col-xl-4">
                         <div class="
@@ -61,16 +61,24 @@
                         </div>
                     </div>
                 {% empty %}
-                    <div class="card mb-3 fieldbox">
-                        <div class="card-header bg-warning cardhead">
-                            No quiz matching your interests right now
-                        </div>
+                    <div class="col-xl-12 text-center card-header bg-danger pagehead">
+                        No quiz matching your interests right now
                     </div>
                 {% endfor %}
             </div>
-            <div class="col-xl-3">
-                <!-- ANNOUNCEMENTS -->
-                
+        </div>
+        <div class="listnotice">
+            <div class="area">
+                <div class="area-heading">
+                    Announcements
+                    <hr width="80%" class="navdivider""/>
+
+                    {% for chat in notices %}
+                        <div class="notices">{{ chat|linebreaks }}</div>
+                    {% empty %}
+                        <div class="notices">NO ANNOUNCEMENTS YET!</div>
+                    {% endfor %}
+                </div>
             </div>
         </div>                  
     </div>

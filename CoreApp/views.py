@@ -89,12 +89,20 @@ class EmployeeHomeQuizListView(ListView):
             .filter(questions_count__gt=0)
         return queryset
 
+class EmployeeHomeAnnouncementsListView(LoginRequiredMixin, ListView):
+    model = Announcement
+    template_name = 'dashboard/employee/home.html'
+
+    def get_queryset(self):
+        return Announcement.objects.filter(posted_at__lt=timezone.now()).order_by('posted_at')
+
 
 def home_employee(self):
     employee = User.objects.filter(is_employee=True).count()
     interest = Interest.objects.all().count()
     quizzes = EmployeeHomeQuizListView.get_queryset(self)
-    context = {'employee': employee, 'interest': interest, 'quizzes': quizzes}
+    notices = EmployeeHomeAnnouncementsListView.get_queryset(self)
+    context = {'employee': employee, 'interest': interest, 'quizzes': quizzes, 'notices': notices}
     template_name = 'dashboard/employee/home.html'
 
     return render(self, template_name, context)
@@ -153,8 +161,10 @@ def start_quiz(request, pk):
     total_questions = quiz.questions.count()
     unanswered_questions = employee.get_unanswered_questions(quiz)
     total_unanswered_questions = unanswered_questions.count()
-    progress = 100 - round(((total_unanswered_questions - 1) / total_questions) * 100)
     question = unanswered_questions.first()
+
+    counter = total_questions - total_unanswered_questions + 1
+    progress = 100 - round(((total_unanswered_questions) / total_questions) * 100)
 
     if request.method == 'POST':
         form = TakeQuizForm(question=question, data=request.POST)
@@ -181,11 +191,14 @@ def start_quiz(request, pk):
     else:
         form = TakeQuizForm(question=question)
 
+    
     return render(request, 'dashboard/employee/take_quiz_form.html', {
         'quiz': quiz,
         'question': question,
         'form': form,
-        'progress': progress
+        'progress': progress,
+        'counter': counter,
+        'total': total_questions,
     })
 
 

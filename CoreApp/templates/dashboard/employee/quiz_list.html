@@ -39,7 +39,7 @@
                         "
                     >
                         <div class="row qcbody">
-                          <p class="float-left col-xl-9" >Quiz: {{ forloop.counter }}</p>
+                          <p class="float-left col-xl-9" >Quiz: {{ quiz.name }}</p>
                           <a href=""  
                             data-quiz="{{ quiz.name }}" 
                             data-count="{{ quiz.questions_count }}"
@@ -59,11 +59,9 @@
                     </div>
                 </div>
             {% empty %}
-                <div class="card mb-3 fieldbox">
-                    <div class="card-header bg-warning cardhead">
-                        No quiz matching your interests right now
-                    </div>
-                </div>
+              <div class="col-xl-12 text-center card-header bg-danger pagehead">
+                  No quiz matching your interests right now
+              </div>
             {% endfor %}
         </div>
       </div>  
