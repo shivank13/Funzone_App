@@ -7,39 +7,28 @@
 <div id="content-wrapper" class="home">
   <div class="homecontainer">      
       <div class="card-body pagecontainer">
-        <h3 class="text-warning">{{ quiz.name }}</h3>
+        <h3 class="numbering">{{ quiz.name }}</h3>
 
         <div class="timer">
           <div class="label">
-            TIME LEFT :
+            TIME LEFT &nbsp : &nbsp &nbsp   
           </div>
-          <div class="progress bg-success">
-            <div class="progress-bar bg-danger" id="timerbar" role="progressbar" aria-valuemin="0" aria-valuemax="20"> 
+          <div class="progress">
+            <div class="progress-bar bg-info" id="timerbar" role="progressbar" aria-valuemin="0" aria-valuemax="20"> 
             </div>
           </div>
         </div>
 
         <div class="questionbox text-white">
-          <p class="lead m-3 font-weight-bold">{{ counter }}. {{ question.text }}</p>
+          <p class="lead font-weight-bold"><span class="numbering">{{ counter }})</span>&nbsp{{ question.text }}</p>
           <form method="post" novalidate>
             {% csrf_token %}
             <div class="options" aria-required="false">
               {% render_field form.answer %}
             </div>
-            <input type="hidden" id="hiddenbox" value="0"/>
-            <button type="submit" class="btn btn-success savebutton" id="savebtn">NEXT <i class="ri-arrow-right-line"></i></button>
+            <button type="submit" class="btn btn-success savebutton float-left" id="savebtn">NEXT <i class="ri-arrow-right-line"></i></button>
           </form>
-          
-          <div class="timer">
-            <div class="label">
-              QUESTIONS :
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-success" id="progressbar" role="progressbar" data-progress="{{ progress }}" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
-                {{ progress }} %
-              </div>
-            </div>
-          </div>
+          <p class="float-right" style="margin-top: 45px;">{{ counter }} out of {{ total }} questions</p>
         </div>
       </div>
     </div>
@@ -51,18 +40,18 @@
     $('#progressbar').css(
       "width", 
       $('#progressbar').data('progress') + "%"
-    )
+    );
 
     $('[id^=id_answer_0]').attr(
       "checked",
       true
-    )
+    );
 
     c = 0;
   }
 
   function timerstart(){
-    if(c<20){
+    if(c<2000){
       c += 1;
 
       $('#timerbar').css(
@@ -70,15 +59,28 @@
         (c * 5)+ "%"
       ).html(c)
     } else {
-      hiddenbox.value = 1;
-      $('[id^=id_answer_1]').attr(
-        "selected",
-        true
-      )
       savebtn.click();
     }
   }
 
   intervalTimer = setInterval("timerstart()", 1000);
+
+  let form = document.querySelector( "form" );
+  let mydiv = document.querySelector("#id_answer").classList.add("mydiv");
+  let firstdiv = document.querySelector(".mydiv > div:first-child").classList.add("firstdiv");
+  let firstlabel = document.querySelector(".firstdiv > label").classList.add("checked");
+  form.addEventListener( "change", ( evt ) => {
+    let trg = evt.target,
+      trg_par = trg.parentElement;   
+    if ( trg.type === "radio" && trg_par &&
+        trg_par.tagName.toLowerCase() === "label" ) {
+      let prior = form.querySelector( 'label.checked input[name="' +
+                                      trg.name + '"]' );
+      if ( prior ) {
+        prior.parentElement.classList.remove( "checked" );
+      } 
+      trg_par.classList.add( "checked" );
+    }
+  }, false );
 </script>
 {% endblock body %}

@@ -486,17 +486,28 @@ div[id^="div_id_answers-"] input {
   padding: 0px 30px;
 }
 #id_answer > div > label{
-  width: 100%;
-  padding: 20px 0px;
-  text-align: center;
-  background-color: rgba(93, 140, 231, 0.4);
-  border-radius: 30px;
+  width: 80%;
+  margin: 15px 10%;
+  padding: 20px 15%;
+  background-color: rgb(93, 140, 231, 0.6);
+  border-radius: 40px;
   font-size: large;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+#id_answer > div > label > input[type="radio"] {
+  opacity: 0;
+  width: 0;
+}
+#id_answer > div > label.checked {
+  background-color: rgb(93, 140, 231, 1);
+  font-size: larger;
+  font-weight: bolder;
 }
 .savebutton{
-  width: 12%;
-  margin: 20px 0 0 5%;
-  font-weight: bolder;
+  width: 16%;
+  margin: 25px 8% 0;
+  font-weight: bold;
   font-size: large;
 }
 
@@ -506,16 +517,20 @@ div[id^="div_id_answers-"] input {
   font-weight: bolder;
   vertical-align: middle;
   align-self: center;
-  margin: 30px 0px;
+  margin: 30px 0;
 }
 .timer .label{
-  flex: 1;
   text-align: center;
   height: 100%;
 }
 .timer .progress{
-  flex: 8;
+  flex: 1;
   align-self: center;
+}
+
+.numbering{
+  margin-right: 15px;
+  color: #eeac4e;
 }
 
 .listquiz{
@@ -546,7 +561,7 @@ div[id^="div_id_answers-"] input {
   background-color: #454d82;
 }
 .area::-webkit-scrollbar-thumb{
-  background-color: #eeac4e;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .area .area-heading{

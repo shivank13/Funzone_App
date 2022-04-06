@@ -4,6 +4,10 @@
 {% block body %}
 <div id="content-wrapper" class="home">
   <div class="homecontainer"> 
+      <div class="card-header pagehead">
+        <i class="ri-edit-box-line"></i>
+        Add Question
+      </div>
       <form method="post" novalidate class="addquestion">
         {% csrf_token %}
         {{ formset.management_form }}

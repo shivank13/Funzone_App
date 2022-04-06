@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand fixed-top">
         <div class="welcome">
             <h3>Hi, {{ user.username }}</h3>
-        </div>
+        </div> 
         <div class="dropdown ml-auto">
             <a class="nav-link dropdown-toggle arrow" href="#" id="dropdown" role="button" data-toggle="dropdown">
                 <img src='{% static "img/pages/user-men.svg" %}' width="50px" height="50px" alt="profile">
@@ -55,7 +55,7 @@
                         <div class="linktext">Admin Dashboard</div>
                     </div>
                 </a>
-            </li>
+            </li> 
             <li class="nav-item active">
                 <a class="nav-link" href="{% url 'reg_organizer' %}">
                     <div class="sideitem">
@@ -133,7 +133,7 @@
 
             <li class="nav-item active dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                href="">
+                href=""> 
                     <div class="sideitem">
                         <div class="icon"><i class="ri-notification-line"></i></div>
                         <div class="linktext">Manage Announcements</div>

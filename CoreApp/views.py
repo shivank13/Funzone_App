@@ -14,7 +14,7 @@ from .forms import TakeQuizForm, EmployeeSignUpForm, OrganizerSignUpForm, Questi
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib import auth
-from django.db.models import Avg, Count, Sum
+from django.db.models import Avg, Count
 from django.forms import inlineformset_factory
 from .models import TakenQuiz, Profile, Quiz, Question, Answer, Employee, User, Interest, Books, Announcement
 from django.db import transaction
