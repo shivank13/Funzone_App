@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>FUN ZONE</title>
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/four/css/bootstrap.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/common.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard/learner.css' %}">
+    <link rel="stylesheet" type="text/css"  href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand fixed-top">
+        <div class="welcome">
+            <h3>Hi, {{ user.username }}</h3>
+            <p>Many new games waiting to be played</p>
+        </div>
+        <div class="dropdown ml-auto">
+            <a class="nav-link dropdown-toggle arrow" href="#" id="dropdown" role="button" data-toggle="dropdown">
+                <img src='{% static "img/pages/user-men.svg" %}' width="50px" height="50px" alt="profile">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropmenu">
+                <a class="dropdown-item dropitem" href="{% url 'emp_profile' %}"
+                    style="display: flex; align-self: center;"
+                >
+                    <i class="ri-user-line" style="margin-right: 5px;"></i>{{ user.username }}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item dropitem" href="" data-toggle="modal" data-target="#logoutModal"
+                    style="display: flex; align-self: center;"
+                >
+                    LOGOUT                   
+                    <i class="ri-logout-box-r-line text-primary" style="font-size: larger; margin-left: 10px;"></i>
+                </a>
+            </div>
+        </div>
+    </nav> 
+
+    <div id="wrapper">
+        <ul class="sidebar navbar-nav"> 
+            <li class="nav-item active">
+                <a class="nav-logo" href="{% url 'employee' %}">
+                    <img src='{% static "img/pages/logo.svg" %}'/>
+                </a>
+            </li> 
+            <hr width="80%" class="navdivider""/>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'employee' %}">
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-home-5-line"></i></div>
+                        <div class="linktext">Employee Dashboard</div>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'emp_interests' %}">
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-heart-line"></i></div>
+                        <div class="linktext">Update Interests</div>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'emp_allquiz' %}">
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-question-answer-line"></i></div>
+                        <div class="linktext">Quizzes/Challenges</div>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'index' %}">
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-question-answer-line"></i></div>
+                        <div class="linktext">Play Tic-Tac-Toe</div>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'emp_books' %}">
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-book-2-line"></i></div>
+                        <div class="linktext">Read Books</div>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'emp_announcements' %}">
+                    <div class="sideitem">
+                        <div class="icon"><i class="ri-notification-line"></i></div>
+                        <div class="linktext">Announcements</div>
+                    </div>
+                </a>
+            </li>
+        </ul> 
+        {% block body %}{% endblock %}
+        <!-- /.content-wrapper -->
+    </div>
+    
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- local scripts -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+    <script src="{% static 'js/sb-admin.min.js' %}"></script>
+    <script>
+            $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
+                $(".alert-success").slideUp(500);
+            });
+            $(".alert-error").fadeTo(2000, 500).slideUp(500, function(){
+                $(".alert-error").slideUp(500);
+            });
+    </script>
+</body>
