@@ -105,6 +105,11 @@
   background-color: #5d8ce7;
   color: white;
   font-size: larger;
+  display: flex;
+  align-self: center;
+}
+.pagehead i{
+  margin: 0px 15px 0px 25px;
 }
 .pageform {
   color: white;

@@ -1,7 +1,7 @@
 var roomCode = document.getElementById("game_board").getAttribute("room_code");
 var char_choice = document.getElementById("game_board").getAttribute("char_choice");
 
-var connectionString = 'wss://' + window.location.host + '/ws/play/' + roomCode + '/';
+var connectionString = 'ws://' + window.location.host + '/ws/play/' + roomCode + '/';
 
 var gameSocket = new WebSocket(connectionString);
 var gameBoard = [

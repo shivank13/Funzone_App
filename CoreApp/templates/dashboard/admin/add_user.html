@@ -3,48 +3,34 @@
  
 {% block body %} 
 <div id="content-wrapper" class="home">
-    <div class="container-fluid">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'owner' %}">Dashboard</a></li>
-            <li class="breadcrumb-item text-success">Manange Users</li>
-            <li class="breadcrumb-item text-danger">Users List</li>
-            <li class="breadcrumb-item text-warning active">Add User</li>
-        </ol>
-        <div class="card mb-3 fieldbox">
-            <div class="card-header bg-success cardhead">
-                <i class="ri-user-add-line"></i>
-                Add New User To The System
-            </div>
-            <div class="card-body cardbody">
-                <form class="form-horizontal formbody" action="{% url 'create_user' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="first_name" placeholder="First Name" id="inputFirst" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="last_name" placeholder="Last Name" id="inputLast" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="username" placeholder="Username" id="inputdescription" required>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="email" name="email" placeholder="Email" id="inputMobile" required>
-                    </div>
-                   <div class="form-group">
-                        <input type="text" class="form-control" name="password" placeholder="Password" id="inputdescription" required>
-                    </div>  
-                    <div class="form-group">
-                        <button type="submit" id="save" class="btn btn-success" href="">Add User</button>
-                    </div>
-                </form>
-            </div>
+    <div class="homecontainer">
+        <div class="card-header pagehead">
+            <i class="ri-user-settings-line"></i>
+            Register Admin
+        </div>
+        <div class="card-body pagecontainer">
+            <form class="form-horizontal formbody" action="{% url 'create_user' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="first_name" placeholder="First Name" id="inputFirst" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" id="inputLast" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Username" id="inputdescription" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="email" name="email" placeholder="Email" id="inputMobile" required>
+                </div>
+               <div class="form-group">
+                    <input type="text" class="form-control" name="password" placeholder="Password" id="inputdescription" required>
+                </div>  
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg primarybtn" href="">Register Admin</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-{% endblock %}
-{% block javascript %}
-    <script type="text/javascript">
-        $("#id_username").attr("placeholder", "Enter Username");
-        $("#id_password").attr("placeholder", "Enter Password");
-    </script>
 {% endblock %}
