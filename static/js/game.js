@@ -2,7 +2,7 @@ var roomCode = document.getElementById("game_board").getAttribute("room_code");
 var char_choice = document.getElementById("game_board").getAttribute("char_choice");
 var user = document.getElementById("game_board").getAttribute("user");
 
-var connectionString = 'ws://' + window.location.host + '/ws/play/' + roomCode + '/';
+var connectionString = 'wss://' + window.location.host + '/ws/play/' + roomCode + '/';
 var gameSocket = new WebSocket(connectionString);
 var gameBoard = [
     -1, -1, -1,
