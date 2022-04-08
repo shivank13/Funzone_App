@@ -1,8 +1,8 @@
 var roomCode = document.getElementById("game_board").getAttribute("room_code");
 var char_choice = document.getElementById("game_board").getAttribute("char_choice");
+var user = document.getElementById("game_board").getAttribute("user");
 
-var connectionString = 'wss://' + window.location.host + '/ws/play/' + roomCode + '/';
-
+var connectionString = 'ws://' + window.location.host + '/ws/play/' + roomCode + '/';
 var gameSocket = new WebSocket(connectionString);
 var gameBoard = [
     -1, -1, -1,
@@ -22,6 +22,10 @@ winIndices = [
 let moveCount = 0;
 let myturn = true;
 
+let counter = 0;
+let user1 = "";
+let user2 = "";
+
 let elementArray = document.getElementsByClassName('square');
 for (var i = 0; i < elementArray.length; i++){
     elementArray[i].addEventListener("click", event=>{
@@ -32,23 +36,28 @@ for (var i = 0; i < elementArray.length; i++){
             }
             else{
                 myturn = false;
-                document.getElementById("alert_move").style.display = 'none'; // Hide          
-                make_move(index, char_choice);
+                document.getElementById("alert_move").style.display = 'none'; // Hide
+                make_move(index, char_choice,user);
             }
         }
     })
 }
 
-function make_move(index, player){
+function make_move(index, player, user){
+    if(counter==0) user1 = user;
+    else if(counter==2) user2 = user;
+    counter++;
+
     index = parseInt(index);
     let data = {
         "event": "MOVE",
         "message": {
             "index": index,
-            "player": player
+            "player": player,
+            "user": user,
         }
     }
-    
+
     if(gameBoard[index] == -1){
         moveCount++;
         if(player == 'X')
@@ -56,7 +65,7 @@ function make_move(index, player){
         else if(player == 'O')
             gameBoard[index] = 0;
         else{
-            alert("Invalid character choice");
+            alert("Invalid Character Choice");
             return false;
         }
         gameSocket.send(JSON.stringify(data))
@@ -66,16 +75,17 @@ function make_move(index, player){
     const win = checkWinner();
     if(myturn){
         if(win){
+            counter = 0;
             data = {
                 "event": "END",
-                "message": `${player} is a winner. Play again?`
+                "message": `${user} is the winner. Play again?`.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
             }
             gameSocket.send(JSON.stringify(data))
         }
         else if(!win && moveCount == 9){
             data = {
                 "event": "END",
-                "message": "It's a draw. Play again?"
+                "message": `It's a draw between ${user1} and ${user2}. Play again?`.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
             }
             gameSocket.send(JSON.stringify(data))
         }
@@ -87,10 +97,10 @@ function reset(){
         -1, -1, -1,
         -1, -1, -1,
         -1, -1, -1,
-    ]; 
+    ];
     moveCount = 0;
     myturn = true;
-    document.getElementById("alert_move").style.display = 'inline';        
+    document.getElementById("alert_move").style.display = 'inline';
     for (var i = 0; i < elementArray.length; i++){
         elementArray[i].innerHTML = "";
     }
@@ -139,20 +149,22 @@ function connect() {
         let data = JSON.parse(e.data);
         data = data["payload"];
         let message = data['message'];
+        console.log(message);
         let event = data["event"];
         switch (event) {
             case "START":
                 reset();
                 break;
             case "END":
+                counter = 0
                 alert(message);
                 reset();
                 break;
             case "MOVE":
                 if(message["player"] != char_choice){
-                    make_move(message["index"], message["player"])
+                    make_move(message["index"], message["player"],message["user"])
                     myturn = true;
-                    document.getElementById("alert_move").style.display = 'inline';        
+                    document.getElementById("alert_move").style.display = 'inline';
                 }
                 break;
             default:

@@ -22,7 +22,7 @@ urlpatterns = [
     path('emp_create_profile/', views.emp_create_profile, name='emp_create_profile'),
 
     path('play/', index, name='index'),
-    path('play/<room_code>', game),
+    path('play/<room_code>', game, name="game"),
 
     # organizer dashboard
     path('organizer/', views.home_organizer, name='organizer'),
