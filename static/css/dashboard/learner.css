@@ -33,6 +33,9 @@
   color: white;
   text-decoration: none;
 }
+.hoversecondary:hover{
+  color: #f44773 !important;
+}
 .generallink {
   font-family: "Be Vietnam";
   font-style: normal;

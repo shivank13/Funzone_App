@@ -78,14 +78,14 @@ function make_move(index, player, user){
             counter = 0;
             data = {
                 "event": "END",
-                "message": `The Winner Is ${user}. Want To Play Again?`
+                "message": `The Winner Is ${user}`
             }
             gameSocket.send(JSON.stringify(data))
         }
         else if(!win && moveCount == 9){
             data = {
                 "event": "END",
-                "message": `It's A Draw Between ${user1} & ${user2}. Want To Play Again?`
+                "message": `It's A Draw Between ${user1} & ${user2}`
             }
             gameSocket.send(JSON.stringify(data))
         }
