@@ -47,7 +47,7 @@ def loginView(request):
             else:
                 return redirect('login_form')
         else:
-            messages.info(request, "Invalid Username or Password")
+            messages.warning(request, "Invalid Username Or Password")
             return redirect('login_form')
 
 
@@ -61,13 +61,13 @@ class EmployeeSignUpView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_invalid(self, form):
-        messages.info(self.request, "Check Password And Select Atleast 2 Interests")
+        messages.warning(self.request, "Check Password And Select Atleast 2 Interests")
         return super().form_invalid(form)
 
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        messages.info(self.request, "Employee Created Successfully")
+        messages.success(self.request, "Employee Created Successfully")
         return redirect('login_form')
 
 
@@ -187,7 +187,11 @@ def start_quiz(request, pk):
                         messages.success(request,
                                          'Congratulations! You completed the quiz %s with success! You scored %s points.' % (
                                              quiz.name, score))
-                    return redirect('emp_takenquiz')
+                    return render(request, 'dashboard/employee/quiz_result.html',{
+                        'quiz': quiz,
+                        'score': score,
+                        'employee': employee
+                    })
     else:
         form = TakeQuizForm(question=question)
 
@@ -246,7 +250,7 @@ def emp_create_profile(request):
         Profile.objects.filter(id=user_id).create(user_id=user_id, first_name=first_name, last_name=last_name,
                                                   phonenumber=phonenumber, hobby=hobby, city=city, country=country,
                                                   birth_date=birth_date, avatar=avatar)
-        messages.success(request, 'Profile was created successfully')
+        messages.success(request, 'Profile Was Created Successfully')
         return redirect('emp_profile')
     else:
         current_user = request.user
@@ -277,7 +281,7 @@ class QuizAddView(CreateView):
         quiz = form.save(commit=False)
         quiz.owner = self.request.user
         quiz.save()
-        messages.success(self.request, 'Quiz created, Go A Head And Add Questions')
+        messages.success(self.request, 'Quiz created, Go Ahead And Add Questions')
         return redirect('update_quiz', quiz.pk)
 
 
@@ -306,7 +310,7 @@ def add_question(request, pk):
             question = form.save(commit=False)
             question.quiz = quiz
             question.save()
-            messages.success(request, 'You may now add answers/options to the question.')
+            messages.success(request, 'You May Now Add Options To The Question')
             return redirect('update_question', quiz.pk, question.pk)
     else:
         form = QuestionForm()
@@ -736,7 +740,7 @@ class AdminQuizDeleteView(DeleteView):
     model = Quiz
     context_object_name = 'quiz'
     template_name = 'dashboard/admin/quiz/delete_quiz.html'
-    success_url = reverse_lazy('edit_quizlist')
+    success_url = reverse_lazy('adm_edit_quizlist')
 
     def delete(self, request, *args, **kwargs):
         quiz = self.get_object()

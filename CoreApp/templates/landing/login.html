@@ -33,5 +33,12 @@
         <center>New user? <a href="{% url 'emp_signup' %}">SignUp</a></center>
       </form>
     </div>  
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script>
+      $(".alert-dismissible").fadeTo(2000, 500).slideUp(500, function(){
+          $(".alert-dismissible").slideUp(500);
+      });
+    </script>
   </body>
 </html>

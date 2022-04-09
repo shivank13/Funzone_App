@@ -592,3 +592,28 @@ div[id^="div_id_answers-"] input {
   display: block;
   padding: 20px 0;
 }
+
+.resultpage{
+  width: 80%;
+  margin: 50px 10%;
+  padding: 20px 10%;
+  background-color: white;
+}
+.resultpage > div:first-child{
+  font-size: 30px;
+  font-weight: bolder;
+  text-align: center;
+  color: #5d8ce7;
+}
+.resultpage > div:not(:first-child, .btnbox){
+  font-size: large;
+  font-weight: bold;
+  color: #de6d56;
+  margin: 15px 0px;
+}
+.resultpage > div:not(:first-child, .btnbox) span{
+  font-size: large;
+  font-weight: bold;
+  margin-left: 20px;
+  color: #f44773;
+}

@@ -1,0 +1,26 @@
+{% extends 'dashboard/employee/base.html' %}
+{% load static %}
+{% load myfilter %}
+{% block body %}
+<div id="content-wrapper" class="home">
+  <div class="homecontainer">
+    <div class="card-header pagehead">
+      <i class="ri-eye-line"></i>
+      Quiz Results
+    </div>
+    <div class="card-body pagecontainer">
+        <div class="resultpage">
+            <div>Thanks For Attempting The Quiz!!</div>
+            <div>NAME: <span>{{ employee }}</span></div>
+            <div>QUIZ: <span>{{ quiz }}</span></div>
+            <div>SCORE: <span>{{ score }}</span></div>
+            <div class="btnbox"> 
+                <a class="btn primarybtn" href="{% url 'emp_takenquiz' %}">Go To Results Page</a>
+                <a class="btn secondarybtn" href="{% url 'employee' %}">Go To Dashboard</a>
+            </div> 
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

@@ -2,7 +2,7 @@ var roomCode = document.getElementById("game_board").getAttribute("room_code");
 var char_choice = document.getElementById("game_board").getAttribute("char_choice");
 var user = document.getElementById("game_board").getAttribute("user");
 
-var connectionString = 'ws://' + window.location.host + '/ws/play/' + roomCode + '/';
+var connectionString = 'wss://' + window.location.host + '/ws/play/' + roomCode + '/';
 var gameSocket = new WebSocket(connectionString);
 var gameBoard = [
     -1, -1, -1,
@@ -78,14 +78,14 @@ function make_move(index, player, user){
             counter = 0;
             data = {
                 "event": "END",
-                "message": `${user} is the winner. Play again?`.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
+                "message": `The Winner Is ${user}. Want To Play Again?`
             }
             gameSocket.send(JSON.stringify(data))
         }
         else if(!win && moveCount == 9){
             data = {
                 "event": "END",
-                "message": `It's a draw between ${user1} and ${user2}. Play again?`.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
+                "message": `It's A Draw Between ${user1} & ${user2}. Want To Play Again?`
             }
             gameSocket.send(JSON.stringify(data))
         }
@@ -128,6 +128,13 @@ function checkWinner(){
     return win;
 }
 
+function modalmessage(message){
+    let displaybody = document.getElementById("gameresult");
+    displaybody.innerHTML = message;
+    let trigger = document.getElementById("triggermodal");
+    trigger.click();
+}
+
 
 function connect() {
     gameSocket.onopen = function open() {
@@ -154,10 +161,10 @@ function connect() {
         switch (event) {
             case "START":
                 reset();
-                break;
+                break; 
             case "END":
-                counter = 0
-                alert(message);
+                counter = 0;
+                modalmessage(message);
                 reset();
                 break;
             case "MOVE":

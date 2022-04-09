@@ -53,5 +53,12 @@
       </form>
       <center>Already Registered? <a href="{% url 'login_form' %}">LogIn</a></center>
     </div>
+
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script>
+      $(".alert-dismissible").fadeTo(2000, 500).slideUp(500, function(){
+          $(".alert-dismissable").slideUp(500);
+      });
+    </script>
   </body>
 </html>
