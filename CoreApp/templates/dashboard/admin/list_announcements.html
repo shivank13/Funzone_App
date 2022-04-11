@@ -6,7 +6,7 @@
     <div class="card-header pagehead">
       <i class="ri-chat-delete-line"></i>
       Delete Announcements
-      <a  class="btn btn-primary" href="{% url 'adm_add_notice' %}" style="padding: 4px 12px; float: right; color: white;">Add Anncouncement</a>
+      <a  class="btn btn-primary" href="{% url 'adm_add_notice' %}" style="padding: 4px 12px; margin-left: 40px;">Add Anncouncement</a>
     </div>
     <div class="card-body pagecontainer">
       {% for message in messages %}
@@ -31,6 +31,10 @@
             </td>
           </tr>
           {% endfor %}
+          {% else %}
+          <tr>
+            <td colspan="2">No Announcements Yet</td>
+          </tr>
           {% endif %}
         </tbody>
       </table>

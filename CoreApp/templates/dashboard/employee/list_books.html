@@ -14,7 +14,7 @@
             <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
                 {{ message }}
             </div>
-            {% endfor %}
+            {% endfor %} 
 
             <table class="table mb-0 tablebox">
                 <thead>
@@ -27,7 +27,7 @@
                 </thead>
                 <tbody>
                 {% if books%}
-                {% for book in books%}
+                {% for book in books %}
                 <tr>
                     <td>
                         {% if book.cover %}
@@ -56,30 +56,13 @@
                     </td>
                 </tr>
                 {% endfor %}
+                {% else %}
+                <tr>
+                <td colspan="3">No Books Available</td>
+                </tr>
                 {% endif %}
                 </tbody>
             </table>
-            {% if is_paginated %}
-            <ul class="pagination">
-                {% if page_obj.has_previous %}
-                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
-                {% else %}
-                <li class="disabled"><span>&laquo;</span></li>
-                {% endif %}
-                {% for i in paginator.page_range %}
-                {% if page_obj.number == i %}
-                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                {% else %}
-                <li><a href="?page={{ i }}">{{ i }}</a></li>
-                {% endif %}
-                {% endfor %}
-                {% if page_obj.has_next %}
-                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-                {% else %}
-                <li class="disabled"><span>&raquo;</span></li>
-                {% endif %}
-            </ul>
-            {% endif %}
         </div>
     </div>
 </div>

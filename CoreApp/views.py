@@ -807,7 +807,7 @@ class AdminAddNoticeView(CreateView):
     model = Announcement
     form_class = PostForm
     template_name = 'dashboard/admin/add_notice.html'
-    success_url = reverse_lazy('allnotices')
+    success_url = reverse_lazy('adm_allnotices')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)

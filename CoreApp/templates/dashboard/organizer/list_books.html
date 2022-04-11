@@ -58,8 +58,12 @@
                     <td>
                         <a href="{% url 'update_book' book.pk %}"><button type="button" class="btn primarybtn">Update Book</button>
                     </td>
-                </tr>
+                </tr> 
                 {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">No Books Available</td>
+                </tr>
                 {% endif %}
                 </tbody>
             </table>

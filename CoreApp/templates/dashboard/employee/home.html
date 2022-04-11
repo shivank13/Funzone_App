@@ -4,7 +4,7 @@
 {% block body %}
 <div id="content-wrapper" class="home">
     <div class="homecontainer">
-        <div class="row m-3 p-3">
+        <div class="row">
             <div class="col-xl-3">
                 <div class="overview">
                     <div class="txt1"> {{ interest }}</div>
@@ -70,13 +70,13 @@
         <div class="listnotice">
             <div class="area">
                 <div class="area-heading">
-                    Announcements
-                    <hr width="80%" class="navdivider""/>
-
+                    ANNOUNCEMENTS
                     {% for chat in notices %}
                         <div class="notices">{{ chat|linebreaks }}</div>
+                        <hr/>
                     {% empty %}
                         <div class="notices">NO ANNOUNCEMENTS YET!</div>
+                        <hr/>
                     {% endfor %}
                 </div>
             </div>

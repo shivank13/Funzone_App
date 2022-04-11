@@ -4,59 +4,43 @@
 {% block body %}
 <div id="content-wrapper" class="home">
   <div class="homecontainer">
-      <div class="card-header pagehead">
-        <i class="ri-question-answer-line"></i>
-        List of Taken Quiz
+    <div class="card-header pagehead">
+      <i class="ri-question-answer-line"></i>
+      List of Taken Quiz
+    </div>
+    <div class="card-body pagecontainer">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        {{ message }}
       </div>
-      <div class="card-body pagecontainer">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-          {{ message }}
-        </div>
+      {% endfor %}
+      {% include 'dashboard/employee/header.html' with active='taken' %}
+      <table class="table mb-0 tablebox">
+        <thead>
+        <tr>
+            <th>Quiz</th>
+            <th>Interest</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if taken_quizzes %}
+        {% for taken_quiz in taken_quizzes %}
+        <tr>
+            <td>
+                {{ taken_quiz.quiz.name }}
+            </td>
+            <td>{{ taken_quiz.quiz.interest }}</td>
+            <td>{{ taken_quiz.score }}</td>
+        </tr>
         {% endfor %}
-        {% include 'dashboard/employee/header.html' with active='taken' %}
-        <div class="row m-3 p-3">
-          <div class="row col-xl-12">
-              {% for taken_quiz in taken_quizzes %}
-                  <div class="col-xl-3">
-                      <div class="
-                            quizcard
-
-                            {% if forloop.counter|modulo:4 == 1 %} 
-                              quizcard1 
-                              {% else %}
-                              {% if forloop.counter|modulo:4 == 2 %} 
-                                quizcard2
-                                {% else %}
-                                {% if forloop.counter|modulo:4 == 3 %} 
-                                  quizcard3
-                                  {% else %}
-                                    quizcard4
-                                {% endif %}
-                              {% endif %}
-                            {% endif %} 
-                          "
-                      >
-                          <div class="row qcbody">
-                              <p class="float-left col-xl-9" >Quiz: {{ taken_quiz.quiz.name }}</p>
-                              <div class="col-xl-3">
-                                <img  src='{% static "img/pages/search.svg" %}' width="40px">
-                              </div>
-                          </div>
-                          <div class="qctext">
-                              <div class="txt1">SCORE: {{ taken_quiz.score }}</div>
-                              <div class="txt2">{{ taken_quiz.quiz.interest }}</div>
-                          </div>
-                      </div>
-                  </div>
-              {% empty %}
-                <div class="col-xl-12 text-center card-header bg-danger pagehead">
-                    No quizzes taken yet!
-                </div>
-              {% endfor %}
-          </div>
-        </div>
-      </div>
+        {% else %}
+        <tr>
+          <td colspan="3">No Quizzes Taken Yet</td>
+        </tr>
+        {% endif %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

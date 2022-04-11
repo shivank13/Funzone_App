@@ -5,7 +5,6 @@
 .primarybtn {
   background: #f44773;
   border-radius: 50px;
-  font-family: "Be Vietnam";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -20,7 +19,6 @@
   border: 1px solid #f44773;
   box-sizing: border-box;
   border-radius: 50px;
-  font-family: "Be Vietnam";
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -543,6 +541,7 @@ div[id^="div_id_answers-"] input {
 
 .listquiz{
   width: 75%;
+  margin-top: 20px;
   float: left;
   padding: 25px;
 }
@@ -550,7 +549,7 @@ div[id^="div_id_answers-"] input {
 .listnotice{
   width: 25%;
   float: left;
-  height: 650px;
+  height: 700px;
   padding: 25px 10px;
 }
 
@@ -574,26 +573,23 @@ div[id^="div_id_answers-"] input {
 
 .area .area-heading{
   color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: large;
+  font-weight: bolder;
+  font-size: larger;
   padding: 20px;
 }
 .area .area-heading hr{
-  color: white;
-  margin: 5px 10% 30px;
-  border: 2px solid white;
+  display: block;
+  width: 100%;
+  border-style: solid;
+  border-color: whitesmoke;
 }
 .notices{
-  background-color: #f44773;
-  margin-bottom: 20px;
+  background-color: transparent;
+  margin: 40px 0px 0px;
 }
 .notices p{
-  text-align: center;
-  font-weight: bold;
   font-size: large;
   display: block;
-  padding: 20px 0;
 }
 
 .resultpage{
