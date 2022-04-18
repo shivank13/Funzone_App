@@ -1,5 +1,6 @@
 var roomCode = document.getElementById("game_board").getAttribute("room_code");
 var char_choice = document.getElementById("game_board").getAttribute("char_choice");
+var user = document.getElementById("game_board").getAttribute("user");
 
 var connectionString = 'wss://' + window.location.host + '/ws/play/' + roomCode + '/';
 var gameSocket = new WebSocket(connectionString);
@@ -36,19 +37,24 @@ for (var i = 0; i < elementArray.length; i++){
             else{
                 myturn = false;
                 document.getElementById("alert_move").style.display = 'none'; // Hide
-                make_move(index, char_choice);
+                make_move(index, char_choice,user);
             }
         }
     })
 }
 
-function make_move(index, player){
+function make_move(index, player, user){
+    if(counter==0) user1 = user;
+    else if(counter==2) user2 = user;
+    counter++;
+
     index = parseInt(index);
     let data = {
         "event": "MOVE",
         "message": {
             "index": index,
             "player": player,
+            "user": user,
         }
     }
 
@@ -72,14 +78,14 @@ function make_move(index, player){
             counter = 0;
             data = {
                 "event": "END",
-                "message": `The Winner Is ${char_choice}`
+                "message": `The Winner Is ${user}`
             }
             gameSocket.send(JSON.stringify(data))
         }
         else if(!win && moveCount == 9){
             data = {
                 "event": "END",
-                "message": `It's A Draw`
+                "message": `It's A Draw Between ${user1} & ${user2}`
             }
             gameSocket.send(JSON.stringify(data))
         }

@@ -14,13 +14,13 @@ def index(request):
 
 
 def game(request, room_code):
-    # current_user = request.user
+    current_user = request.user
     choice = request.GET.get("choice")
     if choice not in ['X', 'O']:
         raise Http404("Choice does not exists")
     context = {
         "char_choice": choice, 
         "room_code": room_code,
-        # "user": current_user,
+        "user": current_user,
     }
     return render(request, "game.html", context)

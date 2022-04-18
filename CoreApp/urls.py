@@ -1,4 +1,4 @@
-from django.urls import path 
+from django.urls import path
 from . import views
 from GameApp.views import index, game
 
@@ -36,7 +36,7 @@ urlpatterns = [
     path('add_question/<int:pk>', views.add_question, name='add_question'),
     path('quiz/<int:quiz_pk>/question/<int:question_pk>/update', views.update_question, name='update_question'),
     path('quiz/<int:quiz_pk>/question/<int:question_pk>/delete/', views.QuestionDeleteView.as_view(),
-        name='delete_question'),
+         name='delete_question'),
 
     path('add_notice/', views.AddNoticeView.as_view(), name='add_notice'),
     path('allnotices/', views.OrganizerAnnouncementsView.as_view(), name='allnotices'),

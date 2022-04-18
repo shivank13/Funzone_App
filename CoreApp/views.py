@@ -373,9 +373,8 @@ class QuestionDeleteView(DeleteView):
         return Question.objects.filter(quiz__owner=self.request.user)
 
     def get_success_url(self):
-        # question = self.get_object()
-        # return reverse('update_question', kwargs={'pk': question.quiz_id})
-        return reverse('edit_quizlist')
+        question = self.get_object()
+        return reverse('update_question', kwargs={'pk': question.quiz_id})
 
 
 class EditQuizListView(ListView):
@@ -696,9 +695,8 @@ class AdminQuestionDeleteView(DeleteView):
         return Question.objects.filter(quiz__owner=self.request.user)
 
     def get_success_url(self):
-        # question = self.get_object()
-        # return reverse('adm_update_question', kwargs={'pk': question.quiz_id})
-        return reverse('adm_edit_quizlist')
+        question = self.get_object()
+        return reverse('adm_update_question', kwargs={'pk': question.quiz_id})
 
 
 class AdminEditQuizListView(ListView):
@@ -903,14 +901,14 @@ def adm_create_profile(request):
         hobby = request.POST['hobby']
         current_user = request.user
         user_id = current_user.id
-        print(user_id) 
+        print(user_id)
 
         Profile.objects.filter(id=user_id).create(user_id=user_id, phonenumber=phonenumber, first_name=first_name,
                                                   last_name=last_name, hobby=hobby, birth_date=birth_date,
                                                   avatar=avatar,
                                                   city=city, country=country)
         messages.success(request, 'Your Profile Was Created Successfully')
-        return redirect('adm_profile')
+        return redirect('auser_profile')
     else:
         current_user = request.user
         user_id = current_user.id
