@@ -97,7 +97,7 @@ class EmployeeHomeAnnouncementsListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Announcement.objects.filter(posted_at__lt=timezone.now()).order_by('posted_at')
 
-
+@login_required(login_url='login_form')
 def home_employee(self):
     employee = User.objects.filter(is_employee=True).count()
     interest = Interest.objects.all().count()
