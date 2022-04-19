@@ -20,6 +20,7 @@ from .models import TakenQuiz, Profile, Quiz, Question, Answer, Employee, User, 
 from django.db import transaction
 from django.contrib.auth.hashers import make_password
 from django.core.files.storage import FileSystemStorage
+from django.contrib.auth.decorators import login_required
 
 
 def login_form(request):
@@ -262,13 +263,13 @@ def emp_create_profile(request):
 
 
 # organizer dashboard
+@login_required(login_url='login_form')
 def home_organizer(request):
     employee = User.objects.filter(is_employee=True).count()
     organizer = User.objects.filter(is_organizer=True).count()
     interest = Interest.objects.all().count()
     users = User.objects.all().count()
     context = {'employee': employee, 'interest': interest, 'organizer': organizer, 'users': users}
-
     return render(request, 'dashboard/organizer/home.html', context)
 
 
@@ -541,6 +542,7 @@ def org_create_profile(request):
 
 
 # admin dashboard
+@login_required(login_url='login_form')
 def home_admin(request):
     employee = User.objects.filter(is_employee=True).count()
     organizer = User.objects.filter(is_organizer=True).count()
